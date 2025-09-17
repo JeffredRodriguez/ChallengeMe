@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChallengeMe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Principal.css" />
+</head>
+<body class="bg-gray-900 text-white font-sans relative min-h-screen">
+
+  <!-- Imagen de fondo opaca -->
+  <img src="/img/Background.png" alt="Fondo"
+       class="absolute inset-0 w-full h-full object-cover opacity-20 -z-10" />
+
+  <!-- Botón hamburguesa -->
+  <button id="menuBtn" 
+          class="fixed top-4 left-4 z-50 p-2 rounded-lg shadow-lg transition">
+    <img src="/img/Iconmenu.png" alt="Menú" class="w-8 h-8"/>
+  </button>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="sidebar fixed top-0 left-0 h-full bg-red-600 flex flex-col items-center py-6">
+    <nav class="flex flex-col items-center gap-12 mt-8">
+      <a href="/Info.html"><img src="/img/IconInfo.png" alt="Info" class="sidebar-icon w-8 h-8"/></a>
+      <a href="#"><img src="/img/IconConfig.svg" alt="Config" class="sidebar-icon w-8 h-8"/></a>
+      <a href="#" id="shareBtn"><img src="/img/IconCompartir.png" alt="Compartir" class="sidebar-icon w-8 h-8"/></a>
+    </nav>
+  </aside>
+
+  <!-- Modal para compartir (nuevo elemento agregado) -->
+  <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
+      <button id="closeModal" class="absolute top-4 right-4 text-white text-xl">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="text-2xl font-bold mb-6 text-center text-red-400">Compartir ChallengeMe</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <a href="#" class="share-option bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="facebook">
+          <i class="fab fa-facebook text-2xl mb-2"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="#" class="share-option bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="whatsapp">
+          <i class="fab fa-whatsapp text-2xl mb-2"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#" class="share-option bg-pink-600 hover:bg-pink-700 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="instagram">
+          <i class="fab fa-instagram text-2xl mb-2"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="#" class="share-option bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="twitter">
+          <i class="fab fa-twitter text-2xl mb-2"></i>
+          <span>Twitter</span>
+        </a>
+        <a href="#" class="share-option bg-red-500 hover:bg-red-600 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="gmail">
+          <i class="fas fa-envelope text-2xl mb-2"></i>
+          <span>Correo</span>
+        </a>
+        <a href="#" id="copyLink" class="share-option bg-gray-600 hover:bg-gray-700 text-white p-4 rounded-lg flex flex-col items-center transition">
+          <i class="fas fa-link text-2xl mb-2"></i>
+          <span>Copiar enlace</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Modal para configuración de audio (nuevo elemento agregado) -->
+  <div id="audioModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
+      <button id="closeAudioModal" class="absolute top-4 right-4 text-white text-xl">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="text-2xl font-bold mb-6 text-center text-red-400">Configuración de Audio</h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-center justify-between">
+          <span class="text-lg">Música de fondo</span>
+          <button id="toggleMusic" class="w-14 h-7 flex items-center bg-gray-600 rounded-full px-1 transition-colors">
+            <div id="musicToggleCircle" class="bg-white w-5 h-5 rounded-full transform transition-transform"></div>
+          </button>
+        </div>
+        
+        <div class="pt-4 border-t border-gray-700">
+          <label for="volumeSlider" class="block text-lg mb-2">Volumen</label>
+          <input id="volumeSlider" type="range" min="0" max="100" value="50" 
+                 class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+          <div class="flex justify-between text-sm text-gray-400 mt-1">
+            <span>0%</span>
+            <span id="volumeValue">50%</span>
+            <span>100%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Elementos de audio para múltiples canciones (ocultos) -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+    <source src="/aud/song2.ogg" type="audio/ogg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/song3.mp3" type="audio/mpeg">
+    <source src="/aud/song3.ogg" type="audio/ogg">
+  </audio> 
+  <!-- Contenido principal (sin cambios) -->
+  <main class="flex flex-col justify-center items-center text-center min-h-screen relative overflow-hidden px-4">
+
+    <!-- Contenedor para las opciones de juego (separadas) -->
+    <div class="game-options-wrapper relative z-20 w-full max-w-6xl flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10 p-4">
+      
+      <!-- Modo Carta -->
+      <div class="game-option-card flex flex-col items-center cursor-pointer transform transition-all duration-300 hover:scale-105">
+        <div class="option-content w-full h-full p-6 rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center">
+          <img src="/img/Iconcarta.png" alt="Modo Carta"
+               class="game-icon w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-lg"/>
+          <span class="mt-3 text-sm sm:text-base md:text-lg text-slate-200">Modo Carta</span>
+        </div>
+      </div>
+
+      <!-- Modo Ruleta -->
+      <div class="game-option-card flex flex-col items-center cursor-pointer transform transition-all duration-300 hover:scale-105">
+        <div class="option-content w-full h-full p-6 rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center">
+          <img src="/img/Iconruleta.png" alt="Modo Ruleta"
+               class="game-icon w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-lg"/>
+          <span class="mt-3 text-sm sm:text-base md:text-lg text-slate-200">Modo Ruleta</span>
+        </div>
+      </div>
+
+      <!-- Tarjetas Flash (bloqueado) -->
+      <div class="game-option-card locked flex flex-col items-center cursor-not-allowed">
+        <div class="option-content w-full h-full p-6 rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center relative">
+          <!-- Imagen normal de tarjetas flash -->
+          <img src="/img/tarjeta.png" alt="Tarjetas Flash"
+               class="game-icon w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-lg"/>
+          
+          <!-- Capa opaca con candado superpuesto -->
+          <div class="locked-overlay absolute inset-0 rounded-3xl bg-gray-900/80 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+            <img src="/img/Lock.png" alt="Bloqueado" class="w-20 h-20 sm:w-12 sm:h-12 object-contain mb-2"/>
+            <span class="text-xs text-slate-300">Desbloquea pronto</span>
+          </div>
+          <span class="mt-3 text-sm sm:text-base md:text-lg text-slate-200">Tarjetas Flash</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <script src="Principal.js"></script>
+</body>
+</html>

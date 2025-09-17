@@ -1,0 +1,21 @@
+.music-on {
+    background-color: #4CAF50; /* Verde cuando está activado */
+    justify-content: flex-end;
+}
+
+.music-off {
+    background-color: #ccc; /* Gris cuando está desactivado */
+    justify-content: flex-start;
+}
+
+#musicToggleCircle {
+    transition: transform 0.3s;
+}
+
+.music-on #musicToggleCircle {
+    transform: translateX(100%);
+}
+
+.music-off #musicToggleCircle {
+    transform: translateX(0);
+}

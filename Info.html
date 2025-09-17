@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Usuario - CHALLENGEME</title>
+  <link rel="stylesheet" href="info.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .section-title {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .section-title:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 80%;
+      width: 5px;
+      background: linear-gradient(to bottom, #ef4444, #f97316);
+      border-radius: 3px;
+    }
+    .back-button {
+      transition: all 0.3s ease;
+    }
+    .back-button:hover {
+      transform: translateX(-5px);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen py-8 px-4">
+  <div class="max-w-4xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl shadow-2xl overflow-hidden">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-red-700 to-red-500 p-6 text-center">
+      <h1 class="text-4xl font-bold mb-2">MANUAL DE USUARIO</h1>
+      <h2 class="text-2xl font-semibold">CHALLENGEME</h2>
+      <div class="mt-4 flex justify-center">
+        <div class="w-24 h-1 bg-white rounded-full"></div>
+      </div>
+    </div>
+
+    <div class="p-8">
+      <!-- Índice -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-center text-red-400">ÍNDICE</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a href="#introduccion" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">1.</span>
+            <span>Introducción</span>
+          </a>
+          <a href="#requisitos" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">2.</span>
+            <span>Requisitos del Sistema</span>
+          </a>
+          <a href="#pantalla-principal" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">3.</span>
+            <span>Pantalla Principal</span>
+          </a>
+          <a href="#modos-juego" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">4.</span>
+            <span>Modos de Juego</span>
+          </a>
+          <a href="#menu-lateral" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">5.</span>
+            <span>Menú Lateral</span>
+          </a>
+          <a href="#controles" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">6.</span>
+            <span>Controles</span>
+          </a>
+          <a href="#preguntas-frecuentes" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">7.</span>
+            <span>Preguntas Frecuentes</span>
+          </a>
+          <a href="#soporte" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+            <span class="mr-3 text-red-400">8.</span>
+            <span>Soporte Técnico</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Introducción -->
+      <section id="introduccion" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">INTRODUCCIÓN</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <p class="mb-4">
+            <strong>ChallengeMe</strong> es una plataforma de juegos interactiva que ofrece diferentes modos de desafíos. Diseñada con una interfaz moderna y atractiva, permite a los usuarios disfrutar de experiencias gaming únicas con efectos visuales inmersivos.
+          </p>
+          <p>
+            Con una estética visual cautivadora y efectos de sonido envolventes, ChallengeMe te transporta a un mundo de retos y diversión donde podrás poner a prueba tus habilidades y competir contra ti mismo o contra otros jugadores.
+          </p>
+        </div>
+      </section>
+
+      <!-- Requisitos del Sistema -->
+      <section id="requisitos" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">REQUISITOS DEL SISTEMA</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Navegador web actualizado</strong> (Chrome 70+, Firefox 65+, Safari 12+, Edge 79+)</li>
+            <li><strong>Conexión a Internet</strong> (para cargar recursos iniciales)</li>
+            <li><strong>Resolución mínima recomendada</strong>: 320px × 480px</li>
+            <li><strong>JavaScript habilitado</strong> en el navegador</li>
+            <li><strong>Almacenamiento local</strong> habilitado para guardar preferencias</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Pantalla Principal -->
+      <section id="pantalla-principal" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">PANTALLA PRINCIPAL</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <p class="mb-4">Al abrir ChallengeMe, encontrarás:</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Fondo inmersivo</strong>: Imagen de fondo con efecto opaco que crea ambiente gaming</li>
+            <li><strong>Opciones de juego</strong>: Tres tarjetas con diferentes modos de juego</li>
+            <li><strong>Texto decorativo</strong>: Título "CHALLENGEME" con efecto visual de fondo</li>
+            <li><strong>Botón de menú</strong>: En la esquina superior izquierda para acceder a más opciones</li>
+          </ol>
+          <div class="mt-4 p-4 bg-gray-600 rounded-lg">
+            <p class="text-sm italic">💡 Consejo: Explora cada elemento de la interfaz para descubrir efectos visuales sorprendentes al interactuar con ellos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modos de Juego -->
+      <section id="modos-juego" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">MODOS DE JUEGO</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2 text-red-300">1. Modo Carta</h3>
+            <ul class="list-disc pl-6">
+              <li><strong>Icono</strong>: Imagen de carta</li>
+              <li><strong>Descripción</strong>: Juego basado en cartas con desafíos y preguntas</li>
+              <li><strong>Estado</strong>: Disponible</li>
+              <li><strong>Interacción</strong>: Clic para comenzar a jugar</li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2 text-red-300">2. Modo Ruleta</h3>
+            <ul class="list-disc pl-6">
+              <li><strong>Icono</strong>: Imagen de ruleta</li>
+              <li><strong>Descripción</strong>: Juego de azar con ruleta temática</li>
+              <li><strong>Estado</strong>: Disponible</li>
+              <li><strong>Interacción</strong>: Clic para comenzar a jugar</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold mb-2 text-red-300">3. Tarjetas Flash</h3>
+            <ul class="list-disc pl-6">
+              <li><strong>Icono</strong>: Imagen de tarjetas con candado</li>
+              <li><strong>Descripción</strong>: Modo de memorización con tarjetas interactivas</li>
+              <li><strong>Estado</strong>: Bloqueado (próximamente)</li>
+              <li><strong>Interacción</strong>: No disponible actualmente</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menú Lateral -->
+      <section id="menu-lateral" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">MENÚ LATERAL</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <p class="mb-4">Accede al menú lateral haciendo clic en el botón ☰ superior izquierdo:</p>
+          
+          <div class="mb-4">
+            <h3 class="text-xl font-semibold mb-2 text-red-300">Opciones disponibles:</h3>
+            <div class="grid gap-4 mt-4">
+              <div class="bg-gray-600 p-4 rounded-lg">
+                <h4 class="font-semibold mb-1">1. Información (Icono ⓘ)</h4>
+                <p class="text-sm">- Detalles sobre la aplicación<br>- Información de los desarrolladores</p>
+              </div>
+              
+              <div class="bg-gray-600 p-4 rounded-lg">
+                <h4 class="font-semibold mb-1">2. Configuración (Icono ⚙️)</h4>
+                <p class="text-sm">- Ajustes de sonido<br>- Preferencias visuales<br>- Opciones de accesibilidad</p>
+              </div>
+              
+              <div class="bg-gray-600 p-4 rounded-lg">
+                <h4 class="font-semibold mb-1">3. Compartir (Icono ↗️)</h4>
+                <p class="text-sm">- Compartir la aplicación con amigos<br>- Opciones para redes sociales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Controles -->
+      <section id="controles" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">CONTROLES</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2 text-red-300">Navegación principal:</h3>
+            <ul class="list-disc pl-6">
+              <li><strong>Clic/tap</strong>: Seleccionar modo de juego o opción de menú</li>
+              <li><strong>Botón menú</strong>: ☰ en esquina superior izquierda</li>
+              <li><strong>Scroll</strong>: Desplazamiento en dispositivos móviles</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold mb-2 text-red-300">Interacciones específicas:</h3>
+            <ul class="list-disc pl-6">
+              <li><strong>Hover (escritorio)</strong>: Efectos visuales en tarjetas de juego</li>
+              <li><strong>Clic fuera del menú</strong>: Cierra el menú lateral automáticamente</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preguntas Frecuentes -->
+      <section id="preguntas-frecuentes" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">PREGUNTAS FRECUENTES</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Por qué la opción "Tarjetas Flash" está bloqueada?</h3>
+            <p>Es una característica en desarrollo que se habilitará en una actualización futura. ¡Mantente atento a las actualizaciones!</p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Cómo cierro el menú lateral?</h3>
+            <p>Puedes hacer clic en el botón de menú nuevamente o hacer clic en cualquier área fuera del menú.</p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿La aplicación guarda mi progreso?</h3>
+            <p>El progreso se gestiona según el modo de juego. Algunos modos pueden guardar automáticamente, mientras que otros pueden requerir que completes sesiones individuales.</p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿ChallengeMe es completamente gratuito?</h3>
+            <p>Sí, actualmente todos los modos disponibles son completamente gratuitos.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Necesito crear una cuenta?</h3>
+            <p>No, puedes comenzar a jugar inmediatamente sin registro.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Soporte Técnico -->
+      <section id="soporte" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">SOPORTE TÉCNICO</h2>
+        <div class="bg-gray-700 p-6 rounded-lg">
+          <p class="mb-4">Si experimentas problemas técnicos:</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li>Actualiza tu navegador a la última versión</li>
+            <li>Asegúrate de tener JavaScript habilitado</li>
+            <li>Limpia la cache de tu navegador</li>
+            <li>Intenta acceder desde otro dispositivo</li>
+          </ol>
+          
+          <div class="mt-6 p-4 bg-red-900 bg-opacity-40 border-l-4 border-red-500 rounded">
+            <p class="text-sm">Para reportar bugs o sugerir características, utiliza la opción de "Información" en el menú lateral.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div class="border-t border-gray-700 pt-6 text-center">
+        <p class="text-lg font-semibold text-red-400">¡Disfruta de ChallengeMe y prepárate para aceptar el desafío!</p>
+        <p class="text-sm text-gray-400 mt-2">Última actualización: Noviembre 2023</p>
+        
+        <a href="javascript:history.back()" class="inline-flex items-center mt-6 text-red-400 hover:text-red-300 transition back-button">
+          <span>← Volver a la aplicación</span>
+        </a>
+      </div>
+    </div>
+  </div>  
+<!-- Al final del body, antes de cerrar </body> -->
+<!-- Modal de audio (mismo que en index.html) -->
+<div id="audioModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
+        <button id="closeAudioModal" class="absolute top-4 right-4 text-white text-xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-6 text-center text-red-400">Configuración de Audio</h2>
+        
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <span class="text-lg">Música de fondo</span>
+                <button id="toggleMusic" class="w-14 h-7 flex items-center bg-gray-600 rounded-full px-1 transition-colors">
+                    <div id="musicToggleCircle" class="bg-white w-5 h-5 rounded-full transform transition-transform"></div>
+                </button>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-700">
+                <label for="volumeSlider" class="block text-lg mb-2">Volumen</label>
+                <input id="volumeSlider" type="range" min="0" max="100" value="50" 
+                       class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                <div class="flex justify-between text-sm text-gray-400 mt-1">
+                    <span>0%</span>
+                    <span id="volumeValue">50%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Elementos de audio (mismos que en index.html) -->
+<audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+</audio>
+<audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+</audio>
+<audio id="backgroundMusic3">
+    <source src="/aud/song3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Scripts -->
+<script src="audio-manager.js"></script>
+<script>
+    // Script específico para info.html que controla los botones de audio
+    document.addEventListener("DOMContentLoaded", function() {
+        // Asegurarse de que el AudioManager esté inicializado
+        if (typeof window.audioManager === 'undefined') {
+            window.audioManager = new AudioManager();
+        }
+        
+        const configBtn = document.querySelector('a[href="#"]');
+        const audioModal = document.getElementById("audioModal");
+        const closeAudioModal = document.getElementById("closeAudioModal");
+        const toggleMusicBtn = document.getElementById("toggleMusic");
+        const volumeSlider = document.getElementById("volumeSlider");
+        const volumeValue = document.getElementById("volumeValue");
+        
+        // Configurar el volumen inicial desde el estado guardado
+        if (volumeSlider && volumeValue) {
+            volumeSlider.value = window.audioManager.volume * 100;
+            volumeValue.textContent = `${volumeSlider.value}%`;
+        }
+        
+        // Abrir modal de audio
+        if (configBtn) {
+            configBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                audioModal.classList.remove("hidden");
+            });
+        }
+        
+        // Cerrar modal
+        if (closeAudioModal) {
+            closeAudioModal.addEventListener("click", () => {
+                audioModal.classList.add("hidden");
+            });
+        }
+        
+        // Alternar música
+        if (toggleMusicBtn) {
+            toggleMusicBtn.addEventListener("click", () => {
+                window.audioManager.toggleMusic();
+                // Actualizar apariencia del botón
+                if (window.audioManager.isMusicOn) {
+                    toggleMusicBtn.classList.remove('music-off');
+                    toggleMusicBtn.classList.add('music-on');
+                } else {
+                    toggleMusicBtn.classList.remove('music-on');
+                    toggleMusicBtn.classList.add('music-off');
+                }
+            });
+        }
+        
+        // Controlar volumen
+        if (volumeSlider) {
+            volumeSlider.addEventListener("input", () => {
+                const volume = volumeSlider.value / 100;
+                window.audioManager.setVolume(volume);
+                volumeValue.textContent = `${volumeSlider.value}%`;
+            });
+        }
+        
+        // Inicializar estado del botón de música
+        if (toggleMusicBtn) {
+            if (window.audioManager.isMusicOn) {
+                toggleMusicBtn.classList.remove('music-off');
+                toggleMusicBtn.classList.add('music-on');
+            } else {
+                toggleMusicBtn.classList.remove('music-on');
+                toggleMusicBtn.classList.add('music-off');
+            }
+        }
+    });
+</script>
+</body>
+</html>

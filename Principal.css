@@ -1,0 +1,210 @@
+/* Sidebar inicial oculto */
+.sidebar {
+  width: 80px;                /* tamaño cuando está visible */
+  transform: translateX(-100%); /* oculto hacia la izquierda */
+  transition: transform 0.3s ease;
+  z-index: 40;
+}
+
+/* Sidebar visible */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Íconos del sidebar */
+.sidebar-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  margin-top: 50px;
+}
+
+#sidebarIcons.show {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+
+
+/* Fondo / logo central */
+.center-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Texto grande de fondo */
+.bg-text {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  letter-spacing: clamp(2px, 2vw, 8px);
+  margin: 0;
+  line-height: 0.9;
+}
+
+/* Subtexto encima */
+.bg-sub {
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.07);
+  display: block;
+  margin-top: -2.2rem;
+}
+
+/* Contenedor de opciones de juego */
+.game-options-wrapper {
+  perspective: 1000px;
+}
+
+/* Tarjetas de opciones individuales */
+.game-option-card {
+  flex: 1;
+  min-width: 180px;
+  max-width: 280px;
+}
+
+.option-content {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-option-card:not(.locked):hover .option-content {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Efecto para la opción bloqueada */
+.game-option-card.locked .option-content {
+  position: relative;
+}
+
+.locked-overlay {
+  transition: opacity 0.3s ease;
+}
+
+.game-option-card.locked:hover .locked-overlay {
+  opacity: 1;
+}
+
+.game-option-card.locked:hover .game-icon {
+  filter: blur(1px);
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 640px) {
+  .sidebar {
+    width: 80px;
+  }
+  
+  .sidebar-icon {
+    margin-top: 40px;
+  }
+  
+  .bg-sub {
+    margin-top: -1.5rem;
+  }
+  
+  .game-options-wrapper {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+  
+  .game-option-card {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+/* Ajustes para pantallas medianas */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .game-options-wrapper {
+    gap: 1.5rem;
+  }
+  
+  .game-option-card {
+    min-width: 160px;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .game-option-card {
+    transform: scale(0.9);
+  }
+  
+  .game-option-card:hover {
+    transform: scale(0.95);
+  }
+}
+/* Modal de compartir (nuevos estilos agregados) */
+#shareModal {
+  transition: opacity 0.3s ease;
+}
+
+#shareModal:not(.hidden) {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.share-option {
+  transition: transform 0.2s ease;
+}
+
+.share-option:hover {
+  transform: translateY(-3px);
+}    /* Modal de audio (nuevos estilos agregados) */
+#audioModal:not(.hidden) {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Estilos para el interruptor de música */
+#toggleMusic.music-on {
+  background-color: #10B981;
+}
+
+#toggleMusic.music-on #musicToggleCircle {
+  transform: translateX(28px);
+}
+
+#toggleMusic.music-off {
+  background-color: #6B7280;
+}
+
+#toggleMusic.music-off #musicToggleCircle {
+  transform: translateX(0);
+}
+
+/* Estilo personalizado para el control deslizante de volumen */
+#volumeSlider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #EF4444;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+}
+
+#volumeSlider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #EF4444;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+}
