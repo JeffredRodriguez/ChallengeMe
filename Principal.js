@@ -161,6 +161,13 @@ document.addEventListener("DOMContentLoaded", function() {
   
 });   
 
+
+
+
+
+
+
+
 // Funcionalidad para control de audio con múltiples canciones y persistencia
 document.addEventListener("DOMContentLoaded", function() {
   // Elementos del modal de audio
@@ -211,6 +218,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
   
+
+
+
   // Función para reproducir la siguiente canción
   function playNextSong() {
     if (!isMusicOn) return;
