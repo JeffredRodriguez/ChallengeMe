@@ -25,12 +25,12 @@
          class="sidebar fixed top-0 left-0 h-full bg-red-600 flex flex-col items-center py-6">
     <nav class="flex flex-col items-center gap-12 mt-8">
       <a href="/Info.html"><img src="/img/IconInfo.png" alt="Info" class="sidebar-icon w-8 h-8"/></a>
-      <a href="#"><img src="/img/IconConfig.svg" alt="Config" class="sidebar-icon w-8 h-8"/></a>
+      <a href="#" id="configBtn"><img src="/img/IconConfig.svg" alt="Config" class="sidebar-icon w-8 h-8"/></a>
       <a href="#" id="shareBtn"><img src="/img/IconCompartir.png" alt="Compartir" class="sidebar-icon w-8 h-8"/></a>
     </nav>
   </aside>
 
-  <!-- Modal para compartir (nuevo elemento agregado) -->
+  <!-- Modal para compartir -->
   <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
     <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
       <button id="closeModal" class="absolute top-4 right-4 text-white text-xl">
@@ -50,10 +50,10 @@
           <i class="fab fa-instagram text-2xl mb-2"></i>
           <span>Instagram</span>
         </a>
-        <a href="#" class="share-option bg-gray-700 hover:bg-black-500 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="X">
-  <img src="/img/IconX.png" alt="Twitter" class="w-6 h-6 mb-2">
-  <span>X</span>
-</a>
+        <a href="#" class="share-option bg-gray-700 hover:bg-gray-800 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="X">
+          <img src="/img/IconX.png" alt="Twitter" class="w-6 h-6 mb-2">
+          <span>X</span>
+        </a>
         <a href="#" class="share-option bg-red-500 hover:bg-red-600 text-white p-4 rounded-lg flex flex-col items-center transition" data-platform="gmail">
           <i class="fas fa-envelope text-2xl mb-2"></i>
           <span>Correo</span>
@@ -65,7 +65,8 @@
       </div>
     </div>
   </div>
-  <!-- Modal para configuración de audio (nuevo elemento agregado) -->
+  
+  <!-- Modal para configuración de audio -->
   <div id="audioModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
     <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
       <button id="closeAudioModal" class="absolute top-4 right-4 text-white text-xl">
@@ -76,8 +77,8 @@
       <div class="space-y-6">
         <div class="flex items-center justify-between">
           <span class="text-lg">Música de fondo</span>
-          <button id="toggleMusic" class="w-14 h-7 flex items-center bg-gray-600 rounded-full px-1 transition-colors">
-            <div id="musicToggleCircle" class="bg-white w-5 h-5 rounded-full transform transition-transform"></div>
+          <button id="toggleMusic" class="w-14 h-7 flex items-center bg-gray-600 rounded-full px-1 transition-colors duration-300">
+            <div id="musicToggleCircle" class="bg-white w-5 h-5 rounded-full transform transition-transform duration-300 translate-x-0"></div>
           </button>
         </div>
         
@@ -95,20 +96,20 @@
     </div>
   </div>
 
-<!-- Elementos de audio para múltiples canciones (ocultos) -->
-<audio id="backgroundMusic1">
-  <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
-</audio>
-<audio id="backgroundMusic2">
-  <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
-</audio>
-<audio id="backgroundMusic3">
-  <source src="/aud/song3.mp3" type="audio/mpeg">
-</audio> 
-  <!-- Contenido principal (sin cambios) -->
+  <!-- Elementos de audio para múltiples canciones -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/song3.mp3" type="audio/mpeg">
+  </audio> 
+  
+  <!-- Contenido principal -->
   <main class="flex flex-col justify-center items-center text-center min-h-screen relative overflow-hidden px-4">
-
-    <!-- Contenedor para las opciones de juego (separadas) -->
+    <!-- Contenedor para las opciones de juego -->
     <div class="game-options-wrapper relative z-20 w-full max-w-6xl flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10 p-4">
       
       <!-- Modo Carta -->
@@ -132,7 +133,6 @@
       <!-- Tarjetas Flash (bloqueado) -->
       <div class="game-option-card locked flex flex-col items-center cursor-not-allowed">
         <div class="option-content w-full h-full p-6 rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center relative">
-          <!-- Imagen normal de tarjetas flash -->
           <img src="/img/tarjeta.png" alt="Tarjetas Flash"
                class="game-icon w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain rounded-lg"/>
           
@@ -144,9 +144,10 @@
           <span class="mt-3 text-sm sm:text-base md:text-lg text-slate-200">Tarjetas Flash</span>
         </div>
       </div>
-
     </div>
   </main>
+  
   <script src="Principal.js"></script>
+  <script src="audio-context.js"></script>
 </body>
 </html>
