@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manual de Usuario - CHALLENGEME</title>
-  <link rel="stylesheet" href="info.css">
+  <link rel="stylesheet" href="Info.css">
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+  <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+   <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
     body {
       font-family: 'Montserrat', sans-serif;
     }
@@ -321,77 +320,6 @@
 
 <!-- Scripts -->
 <script src="audio-manager.js"></script>
-<script>
-    // Script específico para info.html que controla los botones de audio
-    document.addEventListener("DOMContentLoaded", function() {
-        // Asegurarse de que el AudioManager esté inicializado
-        if (typeof window.audioManager === 'undefined') {
-            window.audioManager = new AudioManager();
-        }
-        
-        const configBtn = document.querySelector('a[href="#"]');
-        const audioModal = document.getElementById("audioModal");
-        const closeAudioModal = document.getElementById("closeAudioModal");
-        const toggleMusicBtn = document.getElementById("toggleMusic");
-        const volumeSlider = document.getElementById("volumeSlider");
-        const volumeValue = document.getElementById("volumeValue");
-        
-        // Configurar el volumen inicial desde el estado guardado
-        if (volumeSlider && volumeValue) {
-            volumeSlider.value = window.audioManager.volume * 100;
-            volumeValue.textContent = `${volumeSlider.value}%`;
-        }
-        
-        // Abrir modal de audio
-        if (configBtn) {
-            configBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                audioModal.classList.remove("hidden");
-            });
-        }
-        
-        // Cerrar modal
-        if (closeAudioModal) {
-            closeAudioModal.addEventListener("click", () => {
-                audioModal.classList.add("hidden");
-            });
-        }
-        
-        // Alternar música
-        if (toggleMusicBtn) {
-            toggleMusicBtn.addEventListener("click", () => {
-                window.audioManager.toggleMusic();
-                // Actualizar apariencia del botón
-                if (window.audioManager.isMusicOn) {
-                    toggleMusicBtn.classList.remove('music-off');
-                    toggleMusicBtn.classList.add('music-on');
-                } else {
-                    toggleMusicBtn.classList.remove('music-on');
-                    toggleMusicBtn.classList.add('music-off');
-                }
-            });
-        }
-        
-        // Controlar volumen
-        if (volumeSlider) {
-            volumeSlider.addEventListener("input", () => {
-                const volume = volumeSlider.value / 100;
-                window.audioManager.setVolume(volume);
-                volumeValue.textContent = `${volumeSlider.value}%`;
-            });
-        }
-        
-        // Inicializar estado del botón de música
-        if (toggleMusicBtn) {
-            if (window.audioManager.isMusicOn) {
-                toggleMusicBtn.classList.remove('music-off');
-                toggleMusicBtn.classList.add('music-on');
-            } else {
-                toggleMusicBtn.classList.remove('music-on');
-                toggleMusicBtn.classList.add('music-off');
-            }
-        }
-    });
-</script>
+
 </body>
 </html>
