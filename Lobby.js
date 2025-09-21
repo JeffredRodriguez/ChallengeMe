@@ -96,6 +96,48 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+
+
+    // 🔹 Función para cargar categorías según edad
+async function loadCategories() {
+    try {
+        if (!supabase) throw new Error('Supabase no está inicializado');
+
+        console.log('Cargando categorías desde Supabase...');
+
+        // Verificar edad guardada en localStorage
+        const isAdult = localStorage.getItem('challengeme_age_verified') === 'adult';
+
+        // Consulta a la tabla
+        let query = supabase.from('categorias').select('*').order('nombre');
+
+        if (!isAdult) {
+            // Solo mostrar categorías que no son exclusivas de adultos
+            query = query.eq('solo_adultos', false);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            console.error('Error cargando categorías:', error);
+            loadDefaultCategories();
+            return;
+        }
+
+        if (data && data.length > 0) {
+            console.log('Categorías cargadas:', data);
+            categories = data;
+            populateCategorySelect();
+        } else {
+            console.log('No se encontraron categorías disponibles');
+            loadDefaultCategories();
+        }
+    } catch (error) {
+        console.error('Error inesperado:', error);
+        loadDefaultCategories();
+    }
+}
+
     // Actualizar lista de jugadores
     function updatePlayersList() {
         jugadoresContainer.innerHTML = '';
