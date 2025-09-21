@@ -6,9 +6,9 @@
   <title>ChallengeMe - Modo Ruleta</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="Lobby.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+  <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+  <link rel="stylesheet" href="Lobby.css">
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-4 relative">
   <!-- Fondo - Asegurar que cubra toda la pantalla -->
@@ -19,7 +19,7 @@
     <img src="/img/Mainlogo.png" alt="ChallengeMe Logo" class="h-40 w-40 md:h-44 md:w-44 object-contain mx-auto">
   </div>
   
-  <div class="container max-w-4xl mx-auto relative z-10 mt-28 md:mt-32"> <!-- Ajuste fino del margen superior -->
+  <div class="container max-w-4xl mx-auto relative z-10 mt-28 md:mt-32">
     <!-- Header vacío (solo para estructura) -->
     <div class="text-center mb-6">
       <!-- Espacio reservado -->
@@ -82,16 +82,17 @@
       </button>
     </div>
   </div>
-<!-- Elementos de audio para múltiples canciones (ocultos) -->
-<audio id="backgroundMusic1">
-  <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
-</audio>
-<audio id="backgroundMusic2">
-  <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
-</audio>
-<audio id="backgroundMusic3">
-  <source src="/aud/song3.mp3" type="audio/mpeg">
-</audio>
+
+  <!-- Elementos de audio para múltiples canciones (ocultos) -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/TARRUSRILEY-LETMEIN.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="Lobby.js"></script>
   <script src="audio-manager.js"></script>
