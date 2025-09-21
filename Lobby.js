@@ -42,16 +42,7 @@ function populateCategorySelect() {
     console.log('Combobox de categorías poblado con', categories.length, 'categorías');
 }
 
-// 🔹 Función por defecto (para cuando Supabase falle o esté vacío)
-function loadDefaultCategories() {
-    categories = [
-        { id: 1, nombre: "General", descripcion: "Preguntas generales" },
-        { id: 2, nombre: "Cultura", descripcion: "Cultura general y tradiciones" },
-        { id: 3, nombre: "Deportes", descripcion: "Preguntas sobre deportes" }
-    ];
-    populateCategorySelect();
-    console.log("Categorías por defecto cargadas.");
-}
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const supabaseInitialized = initSupabase();
@@ -131,22 +122,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Validar botón Jugar
+    // 🔹 CORRECCIÓN: Validación botón Jugar
     function updateJugarButton() {
-        const activePlayers = players.slice(0, playerCount);
-        const allPlayersNamed = activePlayers.every(name => name && name.trim() !== '');
-        const isCategorySelected = selectedCategory !== null;
+    const activePlayers = players.slice(0, playerCount);
+    const allPlayersNamed = activePlayers.every(name => typeof name === 'string' && name.trim() !== '');
+    const isCategorySelected = selectedCategory !== null && categories.some(c => c.id === selectedCategory);
 
-        jugarButton.disabled = !isCategorySelected || !allPlayersNamed;
+    jugarButton.disabled = !isCategorySelected || !allPlayersNamed;
 
-        if (jugarButton.disabled) {
-            jugarButton.title = !isCategorySelected ? 
-                'Selecciona una categoría para jugar' : 
-                'Todos los jugadores deben tener un nombre';
-        } else {
-            jugarButton.title = '';
-        }
+    if (jugarButton.disabled) {
+        jugarButton.title = !isCategorySelected
+            ? 'Selecciona una categoría para jugar'
+            : 'Todos los jugadores deben tener un nombre';
+    } else {
+        jugarButton.title = '';
     }
+}
+
 
     // Eventos de jugadores
     decreaseButton.addEventListener('click', () => {
@@ -171,27 +163,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Evento de categoría
-    categoriaSelect.addEventListener('change', (e) => {
-        selectedCategory = e.target.value ? parseInt(e.target.value) : null;
-        if (selectedCategory) {
-            const categoria = categories.find(c => c.id === selectedCategory);
-            if (categoria && categoria.descripcion) {
-                categoriaDescripcion.textContent = categoria.descripcion;
-                categoriaDescripcion.classList.remove('hidden');
-            } else {
-                categoriaDescripcion.classList.add('hidden');
-            }
+  categoriaSelect.addEventListener('change', (e) => {
+    const value = e.target.value;
+    const parsedValue = parseInt(value);
+    selectedCategory = Number.isInteger(parsedValue) ? parsedValue : null;
+
+    if (selectedCategory !== null) {
+        const categoria = categories.find(c => c.id === selectedCategory);
+        if (categoria && categoria.descripcion) {
+            categoriaDescripcion.textContent = categoria.descripcion;
+            categoriaDescripcion.classList.remove('hidden');
         } else {
             categoriaDescripcion.classList.add('hidden');
         }
-        updateJugarButton();
-    });
+    } else {
+        categoriaDescripcion.classList.add('hidden');
+    }
+
+    updateJugarButton();
+});
 
     // Evento de jugar
     jugarButton.addEventListener('click', async () => {
         const activePlayers = players.slice(0, playerCount);
-        const allPlayersNamed = activePlayers.every(name => name && name.trim() !== '');
-        if (!selectedCategory || !allPlayersNamed) return;
+        const allPlayersNamed = activePlayers.every(name => typeof name === 'string' && name.trim() !== '');
+        if (selectedCategory === null || !allPlayersNamed) return;
 
         const categoriaSeleccionada = categories.find(c => c.id === selectedCategory);
         const nombreCategoria = categoriaSeleccionada ? categoriaSeleccionada.nombre : 'Categoría Desconocida';
@@ -213,14 +209,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Inicializar
     async function init() {
-        console.log('Inicializando lobby de ruleta...');
-        for (let i = 0; i < 4; i++) {
-            if (!players[i]) players[i] = `Jugador ${i + 1}`;
-        }
-        await loadCategories();
-        updatePlayersList();
-        updateJugarButton();
-    }
+    console.log('Inicializando lobby de ruleta...');
+    players = players.map((p, i) => p || `Jugador ${i + 1}`);
+    await loadCategories();
+    updatePlayersList();
+    updateJugarButton();
+}
+
 
     init();
 });
