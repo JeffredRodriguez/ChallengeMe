@@ -1,57 +1,22 @@
 // ------------------------
-// CONFIGURACIÓN SUPABASE
+// lobby.js
 // ------------------------
-const SUPABASE_URL = "https://yymhkhpxeeaqvstdjjlr.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5bWhraHB4ZWVhcXZzdGRqamxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MjY1NjgsImV4cCI6MjA3MTQwMjU2OH0.IR8sISA9HXYRB_FsxuyKwYp0n_YCEojLN3lcdhdXSMQ";
-
-// Variable global para Supabase
-let supabase;
-let categories = []; // 🔹 Declaración global
-
-// Inicializar Supabase
-function initSupabase() {
-    try {
-        if (typeof window.supabase === 'undefined') {
-            console.error('Error: La biblioteca de Supabase no está cargada');
-            return false;
-        }
-        
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        console.log('Supabase inicializado correctamente');
-        return true;
-    } catch (error) {
-        console.error('Error inicializando Supabase:', error);
-        return false;
-    }
-}
-
-// Llenar el select con las categorías
-function populateCategorySelect() {
-    const categoriaSelect = document.getElementById('categoria-select');
-    while (categoriaSelect.options.length > 1) {
-        categoriaSelect.remove(1);
-    }
-
-    categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category.id;
-        option.textContent = category.nombre;
-        categoriaSelect.appendChild(option);
-    });
-
-    console.log('Combobox de categorías poblado con', categories.length, 'categorías');
-}
-
-
+import { getSupabaseClient } from './SupabaseConection.js';
 
 document.addEventListener("DOMContentLoaded", function() {
-    const supabaseInitialized = initSupabase();
-    
-    if (!supabaseInitialized) {
+    const supabase = getSupabaseClient();
+    if (!supabase) {
         alert('Error de conexión. Algunas funciones pueden no estar disponibles.');
+        return;
     }
 
-    // Elementos del DOM
+    // Variables globales
+    let categories = [];
+    let selectedCategory = null;
+    let players = Array(8).fill('');
+    let playerCount = 4;
+
+    // DOM
     const categoriaSelect = document.getElementById('categoria-select');
     const categoriaDescripcion = document.getElementById('categoria-descripcion');
     const jugadoresContainer = document.getElementById('jugadores-container');
@@ -60,85 +25,46 @@ document.addEventListener("DOMContentLoaded", function() {
     const increaseButton = document.getElementById('increase-players');
     const jugarButton = document.getElementById('btn-jugar');
 
-    // Estado de la aplicación
-    let playerCount = 4;
-    let selectedCategory = null;
-    let players = Array(8).fill('');
+    // Poblar el select
+    function populateCategorySelect() {
+        while (categoriaSelect.options.length > 1) {
+            categoriaSelect.remove(1);
+        }
+
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id;
+            option.textContent = category.nombre;
+            categoriaSelect.appendChild(option);
+        });
+
+        console.log('✅ Categorías cargadas en combobox:', categories.length);
+    }
 
     // Cargar categorías desde Supabase
     async function loadCategories() {
         try {
-            if (!supabase) throw new Error('Supabase no está inicializado');
-
             console.log('Cargando categorías desde Supabase...');
-            const { data, error } = await supabase
-                .from('categorias')
-                .select('*')
-                .order('nombre');
+            const isAdult = localStorage.getItem('challengeme_age_verified') === 'adult';
+
+            let query = supabase.from('categorias').select('*').order('nombre');
+            if (!isAdult) query = query.eq('solo_adultos', false);
+
+            const { data, error } = await query;
 
             if (error) {
                 console.error('Error cargando categorías:', error);
-                loadDefaultCategories();
                 return;
             }
 
-            if (data && data.length > 0) {
-                console.log('Categorías cargadas:', data);
-                categories = data;
-                populateCategorySelect();
-            } else {
-                console.log('No se encontraron categorías en la base de datos');
-                loadDefaultCategories();
-            }
+            categories = data || [];
+            populateCategorySelect();
         } catch (error) {
             console.error('Error inesperado:', error);
-            loadDefaultCategories();
         }
     }
 
-
-
-    // 🔹 Función para cargar categorías según edad
-async function loadCategories() {
-    try {
-        if (!supabase) throw new Error('Supabase no está inicializado');
-
-        console.log('Cargando categorías desde Supabase...');
-
-        // Verificar edad guardada en localStorage
-        const isAdult = localStorage.getItem('challengeme_age_verified') === 'adult';
-
-        // Consulta a la tabla
-        let query = supabase.from('categorias').select('*').order('nombre');
-
-        if (!isAdult) {
-            // Solo mostrar categorías que no son exclusivas de adultos
-            query = query.eq('solo_adultos', false);
-        }
-
-        const { data, error } = await query;
-
-        if (error) {
-            console.error('Error cargando categorías:', error);
-            loadDefaultCategories();
-            return;
-        }
-
-        if (data && data.length > 0) {
-            console.log('Categorías cargadas:', data);
-            categories = data;
-            populateCategorySelect();
-        } else {
-            console.log('No se encontraron categorías disponibles');
-            loadDefaultCategories();
-        }
-    } catch (error) {
-        console.error('Error inesperado:', error);
-        loadDefaultCategories();
-    }
-}
-
-    // Actualizar lista de jugadores
+    // Lista de jugadores
     function updatePlayersList() {
         jugadoresContainer.innerHTML = '';
         for (let i = 0; i < playerCount; i++) {
@@ -164,23 +90,17 @@ async function loadCategories() {
         }
     }
 
-    // 🔹 CORRECCIÓN: Validación botón Jugar
+    // Validar botón Jugar
     function updateJugarButton() {
-    const activePlayers = players.slice(0, playerCount);
-    const allPlayersNamed = activePlayers.every(name => typeof name === 'string' && name.trim() !== '');
-    const isCategorySelected = selectedCategory !== null && categories.some(c => c.id === selectedCategory);
+        const activePlayers = players.slice(0, playerCount);
+        const allPlayersNamed = activePlayers.every(name => typeof name === 'string' && name.trim() !== '');
+        const isCategorySelected = selectedCategory !== null && categories.some(c => c.id === selectedCategory);
 
-    jugarButton.disabled = !isCategorySelected || !allPlayersNamed;
-
-    if (jugarButton.disabled) {
-        jugarButton.title = !isCategorySelected
-            ? 'Selecciona una categoría para jugar'
-            : 'Todos los jugadores deben tener un nombre';
-    } else {
-        jugarButton.title = '';
+        jugarButton.disabled = !isCategorySelected || !allPlayersNamed;
+        jugarButton.title = jugarButton.disabled
+            ? (!isCategorySelected ? 'Selecciona una categoría para jugar' : 'Todos los jugadores deben tener un nombre')
+            : '';
     }
-}
-
 
     // Eventos de jugadores
     decreaseButton.addEventListener('click', () => {
@@ -205,28 +125,28 @@ async function loadCategories() {
     });
 
     // Evento de categoría
-  categoriaSelect.addEventListener('change', (e) => {
-    const value = e.target.value;
-    const parsedValue = parseInt(value);
-    selectedCategory = Number.isInteger(parsedValue) ? parsedValue : null;
+    categoriaSelect.addEventListener('change', (e) => {
+        const value = e.target.value;
+        const parsedValue = parseInt(value);
+        selectedCategory = Number.isInteger(parsedValue) ? parsedValue : null;
 
-    if (selectedCategory !== null) {
-        const categoria = categories.find(c => c.id === selectedCategory);
-        if (categoria && categoria.descripcion) {
-            categoriaDescripcion.textContent = categoria.descripcion;
-            categoriaDescripcion.classList.remove('hidden');
+        if (selectedCategory !== null) {
+            const categoria = categories.find(c => c.id === selectedCategory);
+            if (categoria && categoria.descripcion) {
+                categoriaDescripcion.textContent = categoria.descripcion;
+                categoriaDescripcion.classList.remove('hidden');
+            } else {
+                categoriaDescripcion.classList.add('hidden');
+            }
         } else {
             categoriaDescripcion.classList.add('hidden');
         }
-    } else {
-        categoriaDescripcion.classList.add('hidden');
-    }
 
-    updateJugarButton();
-});
+        updateJugarButton();
+    });
 
     // Evento de jugar
-    jugarButton.addEventListener('click', async () => {
+    jugarButton.addEventListener('click', () => {
         const activePlayers = players.slice(0, playerCount);
         const allPlayersNamed = activePlayers.every(name => typeof name === 'string' && name.trim() !== '');
         if (selectedCategory === null || !allPlayersNamed) return;
@@ -251,13 +171,12 @@ async function loadCategories() {
 
     // Inicializar
     async function init() {
-    console.log('Inicializando lobby de ruleta...');
-    players = players.map((p, i) => p || `Jugador ${i + 1}`);
-    await loadCategories();
-    updatePlayersList();
-    updateJugarButton();
-}
-
+        console.log('Inicializando lobby...');
+        players = players.map((p, i) => p || `Jugador ${i + 1}`);
+        await loadCategories();
+        updatePlayersList();
+        updateJugarButton();
+    }
 
     init();
 });
