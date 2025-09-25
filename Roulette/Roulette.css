@@ -95,15 +95,16 @@ body {
   height: 340px;
   border: 14px solid #fff3;
   border-radius: 50%;
+  /* Nuevo diseño: colores más modernos y vibrantes */
   background: conic-gradient(
-    #ff6666 0deg 45deg,
-    #66ccff 45deg 90deg,
-    #ffcc66 90deg 135deg,
-    #99ff99 135deg 180deg,
-    #cc99ff 180deg 225deg,
-    #ff9966 225deg 270deg,
-    #66ffcc 270deg 315deg,
-    #ff6699 315deg 360deg
+    #3b82f6 0deg 45deg,      /* Azul Tailwind */
+    #f59e42 45deg 90deg,     /* Naranja suave */
+    #10b981 90deg 135deg,    /* Verde esmeralda */
+    #f43f5e 135deg 180deg,   /* Rosa fuerte */
+    #a78bfa 180deg 225deg,   /* Violeta pastel */
+    #fbbf24 225deg 270deg,   /* Amarillo dorado */
+    #06b6d4 270deg 315deg,   /* Cyan */
+    #6366f1 315deg 360deg    /* Indigo */
   );
   display: flex;
   justify-content: center;
@@ -113,7 +114,6 @@ body {
   overflow: visible;
   transition: transform 2.5s cubic-bezier(.17,.67,.83,.67);
 }
-
 .roulette-pointer {
   position: absolute;
   top: -32px;
@@ -142,41 +142,49 @@ body {
   text-shadow: 0 2px 8px #000a;
 }
 
-.neon-glow {
-  box-shadow: 0 0 18px #00fff7, 0 0 32px #00fff7aa;
-  color: #00fff7;
-  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7aa;
-}
 
-.spin-btn {
-  margin-top: 30px;
-  padding: 14px 38px;
-  background: linear-gradient(90deg, #ff4d4d, #ffb347);
-  color: #fff;
+
+/* Todos los botones principales rojo #e53e3e, excepto los de respuesta ✔ y ✘ */
+.spin-btn,
+.btn.pause,
+#show-answer,
+#btn-pausa {
+  background: #e53e3e !important;
+  color: #fff !important;
   border: none;
-  border-radius: 14px;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 18px #ff4d4d55;
+  box-shadow: none !important;
   transition: background 0.2s, transform 0.2s;
 }
 
-.spin-btn:active {
+.spin-btn:active,
+.btn.pause:active,
+#show-answer:active,
+#btn-pausa:active {
+  background: #c53030 !important;
   transform: scale(0.97);
-  background: linear-gradient(90deg, #ffb347, #ff4d4d);
 }
 
+.btn:disabled,
 .spin-btn:disabled {
-  background: #444;
+  background: #feb2b2 !important;
+  color: #fff5f5 !important;
   cursor: not-allowed;
-  color: #bbb;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
-.neon-btn {
-  box-shadow: 0 0 18px #ff4d4d, 0 0 32px #ffb34788;
-  text-shadow: 0 0 8px #fff, 0 0 16px #ffb347aa;
+/* Solo los botones de respuesta ✔ y ✘ mantienen sus colores */
+.btn.green {
+  background: linear-gradient(90deg, #00d680, #00d680);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
+}
+
+.btn.red {
+  background: linear-gradient(90deg, #ff4d4d, #ff4d4d);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
 }
 
 /* Segments (opcional, para JS) */

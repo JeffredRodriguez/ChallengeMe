@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="Roulette.css" />
 </head>
 <body
-  class="min-h-screen flex flex-col justify-between"
-  style="background: url('/img/Background.png') center center / cover no-repeat;"
+  class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-4 relative">
+  <!-- Fondo - Asegurar que cubra toda la pantalla -->
+  <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
 >
   <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
     <!-- Panel Izquierdo - Podio -->
@@ -43,8 +44,6 @@
         <h3 id="question-text" class="text-lg font-bold mb-2">¿Pregunta?</h3>
         <p class="category text-sm mb-1">Categoría: <span id="question-category"></span></p>
         <p class="difficulty text-xs mb-2" id="question-difficulty">dificultad</p>
-        <input type="text" id="answer-input" placeholder="Escribe tu respuesta..." class="w-full p-2 rounded bg-gray-800 text-white mb-2" />
-        <button id="submit-answer" class="btn green w-full mb-2">Responder</button>
         <button id="show-answer" class="btn red w-full mb-2">Ver respuesta</button>
         <div id="answer-result" class="answer-result hidden mt-2">
           <p>Respuesta correcta: <span id="correct-answer"></span></p>
