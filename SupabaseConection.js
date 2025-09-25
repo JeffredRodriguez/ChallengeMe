@@ -71,4 +71,5 @@ console.log('SupabaseConnection.js cargado correctamente');
 
 
 export function getSupabaseClient() {
-    return window.supabaseClient.getClient();}
+    return window.supabaseClient.getClient();
+}

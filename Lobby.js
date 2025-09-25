@@ -1,6 +1,4 @@
-// ------------------------
-// lobby.js
-// ------------------------
+
 import { getSupabaseClient } from './SupabaseConection.js';
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -166,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         localStorage.setItem('ruletaGameConfig', JSON.stringify(gameConfig));
-        window.location.href = 'ruleta-juego.html';
+        window.location.href = './Roulette/Roulette.html';
     });
 
     // Inicializar

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ruleta - ChallengeMe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Roulette.css" />
+</head>
+<body
+  class="min-h-screen flex flex-col justify-between"
+  style="background: url('/img/Background.png') center center / cover no-repeat;"
+>
+  <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
+    <!-- Panel Izquierdo - Podio -->
+    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
+      <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
+      <div id="players-container" class="players-list w-full"></div>
+    </aside>
+
+    <!-- Centro - Ruleta -->
+    <main class="main-game col-span-3 flex flex-col items-center justify-center">
+      <div class="roulette-container flex flex-col items-center">
+        <div class="relative flex items-center justify-center">
+          <div class="roulette-wheel" id="roulette-wheel">
+            <!-- Los segmentos se renderizan dinámicamente -->
+            <div class="wheel-center neon-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold px-8 py-4 shadow-lg">ChallengeMe</div>
+            <div class="roulette-pointer"></div>
+          </div>
+        </div>
+        <button id="spin-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Girar la Ruleta</button>
+      </div>
+      <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
+        <h2 id="category-name" class="text-xl font-semibold mb-1">Categoría</h2>
+        <p id="category-description" class="text-sm text-gray-200">Preguntas de la categoría seleccionada.</p>
+      </div>
+    </main>
+
+    <!-- Derecha - Pregunta -->
+    <aside class="question-panel glass col-span-1 flex flex-col items-center py-6 px-2">
+      <div id="question-area" class="question-area hidden w-full max-w-xs mx-auto bg-[#222c] p-6 rounded-lg shadow-lg">
+        <h3 id="question-text" class="text-lg font-bold mb-2">¿Pregunta?</h3>
+        <p class="category text-sm mb-1">Categoría: <span id="question-category"></span></p>
+        <p class="difficulty text-xs mb-2" id="question-difficulty">dificultad</p>
+        <input type="text" id="answer-input" placeholder="Escribe tu respuesta..." class="w-full p-2 rounded bg-gray-800 text-white mb-2" />
+        <button id="submit-answer" class="btn green w-full mb-2">Responder</button>
+        <button id="show-answer" class="btn red w-full mb-2">Ver respuesta</button>
+        <div id="answer-result" class="answer-result hidden mt-2">
+          <p>Respuesta correcta: <span id="correct-answer"></span></p>
+          <div class="result-buttons flex gap-2 mt-2">
+            <button id="btn-correct" class="btn green">✔</button>
+            <button id="btn-incorrect" class="btn red">✘</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Barra inferior - Jugador actual -->
+  <footer class="footer glass fixed bottom-0 left-0 right-0 mx-auto w-full max-w-4xl flex justify-between items-center px-6 py-3 rounded-t-lg shadow-lg">
+    <span>Turno de: <strong id="current-player"></strong></span>
+    <button id="btn-pausa" class="btn pause">⏸ Pausa</button>
+  </footer>
+
+  <!-- Modal Pausa -->
+  <div id="pause-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>Juego en Pausa</h2>
+      <button id="resume-game" class="btn green">Reanudar</button>
+      <button id="exit-game" class="btn red">Salir</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="../SupabaseConection.js"></script>
+  <script type="module" src="../Audio-manager.js"></script>
+  <script type="module" src="Roulette.js"></script>
+</body>
+</html>
