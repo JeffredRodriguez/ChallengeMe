@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChallengeMe - Modo Carta</title>
+  <link rel="stylesheet" href="Card.css">
+</head>
+<body>
+  <h1 class="titulo">🎲 ChallengeMe - Modo Carta</h1>
+
+  <!-- Información de categoría -->
+  <div class="categoria-info">
+    <p><strong>Categoría actual:</strong> <span id="categoriaNombre">Cargando...</span></p>
+  </div>
+
+  <!-- Selección de categoría (solo informativa) -->
+  <div class="categoria-container">
+    <label for="categoriaSelect">Categoría seleccionada:</label>
+    <select id="categoriaSelect" disabled>
+      <option value="">Cargando...</option>
+    </select>
+  </div>
+
+  <!-- Carta con flip -->
+  <div class="flip-card">
+    <div class="flip-card-inner" id="cardInner" backgrouund-image="url('/img/Cardlogo.png')>
+      <div class="flip-card-front">
+        <p class="title">Carta</p>
+        <p>Haz click en "Repartir"</p>
+      </div>
+      <div class="flip-card-back">
+        <p id="retoTexto">Aquí aparecerá tu reto...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para repartir -->
+  <div class="acciones">
+    <button id="btnRepartir">Repartir Carta</button>
+  </div>
+
+  <!-- Botón para volver al lobby -->
+  <div class="volver-lobby">
+    <button onclick="window.location.href='lobby.html'">← Volver al Lobby</button>
+  </div>
+
+  <script type="module" src="./Card.js"></script>
+</body>
+</html>

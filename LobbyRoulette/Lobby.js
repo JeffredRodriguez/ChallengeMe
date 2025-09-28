@@ -1,5 +1,5 @@
 
-import { getSupabaseClient } from './SupabaseConection.js';
+import { getSupabaseClient } from '../SupabaseConection.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const supabase = getSupabaseClient();
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         localStorage.setItem('ruletaGameConfig', JSON.stringify(gameConfig));
-        window.location.href = './Roulette/Roulette.html';
+        window.location.href = '../Roulette/Roulette.html';
     });
 
     // Inicializar
