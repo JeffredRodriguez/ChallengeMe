@@ -1,5 +1,5 @@
 // ------------------------
-// CLIENTE SUPABASE (Singleton)
+// CLIENTE SUPABASE 
 // ------------------------
 
 class SupabaseClient {

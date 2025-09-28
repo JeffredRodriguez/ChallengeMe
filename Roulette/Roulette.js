@@ -1,5 +1,5 @@
 // ------------------------
-// JUEGO DE RULETA (Usando Singleton Supabase)
+// JUEGO DE RULETA
 // ------------------------
 
 class RuletaGame {
