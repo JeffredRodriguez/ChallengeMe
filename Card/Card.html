@@ -1,50 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChallengeMe - Modo Carta</title>
-  <link rel="stylesheet" href="Card.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cartas - ChallengeMe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Card.css" />
 </head>
-<body>
-  <h1 class="titulo">🎲 ChallengeMe - Modo Carta</h1>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-4 relative">
+  <!-- Fondo -->
+  <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
 
-  <!-- Información de categoría -->
-  <div class="categoria-info">
-    <p><strong>Categoría actual:</strong> <span id="categoriaNombre">Cargando...</span></p>
+  <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
+    <!-- Panel Izquierdo - Podio -->
+    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
+      <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
+      <div id="players-container" class="players-list w-full"></div>
+    </aside>
+
+   <!-- Centro - Carta -->
+<!-- Centro - Carta -->
+<main class="main-game col-span-3 flex flex-col items-center justify-center">
+  <div class="card-container flex flex-col items-center">
+    <div class="relative flex items-center justify-center">
+      <!-- Contenedor de la carta -->
+      <div class="game-card" id="game-card">
+        <div class="card-inner" id="card-inner">
+          <!-- Frente -->
+          <div class="card-face card-front">
+            <img src="/img/Cardlogo.png" alt="ChallengeMe" class="card-image-full">
+          </div>
+          <!-- Reverso -->
+          <div class="card-face card-back">
+            <div id="card-text" class="card-text">Haz clic para comenzar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Botones de resultado (se muestran cuando la carta está volteada) -->
+    <div id="result-buttons-container" class="result-buttons-container hidden mt-6 flex gap-4">
+      <button id="btn-completed-main" class="btn green px-6 py-3 rounded-lg font-bold">
+        ✔ Completado
+      </button>
+      <button id="btn-failed-main" class="btn red px-6 py-3 rounded-lg font-bold">
+        ✘ Fallo
+      </button>
+    </div>
+
+
+    <button id="next-card-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Siguiente Carta</button>
+  </div>
+  <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
+    <h2 id="category-name" class="text-xl font-semibold mb-1">Categoría</h2>
+    <p id="category-description" class="text-sm text-gray-200">Retos de la categoría seleccionada.</p>
+  </div>
+</main>
+
+    <!-- Derecha - Información del Reto -->
+    <aside class="question-panel glass col-span-1 flex flex-col items-center py-6 px-2">
+      <div id="challenge-area" class="challenge-area hidden w-full max-w-xs mx-auto bg-[#222c] p-6 rounded-lg shadow-lg">
+        <h3 id="challenge-text" class="text-lg font-bold mb-2">Reto</h3>
+        <p class="category text-sm mb-1">Categoría: <span id="challenge-category"></span></p>
+        <p class="difficulty text-xs mb-2" id="challenge-difficulty">dificultad</p>
+        <button id="show-result" class="btn red w-full mb-2">Ver resultado</button>
+        <div id="challenge-result" class="challenge-result hidden mt-2">
+          <p>Puntos: <span id="challenge-points"></span></p>
+          <div class="result-buttons flex gap-2 mt-2">
+            <button id="btn-completed" class="btn green">✔ Completado</button>
+            <button id="btn-failed" class="btn red">✘ Fallo</button>
+          </div>
+        </div>
+      </div>
+    </aside>
   </div>
 
-  <!-- Selección de categoría (solo informativa) -->
-  <div class="categoria-container">
-    <label for="categoriaSelect">Categoría seleccionada:</label>
-    <select id="categoriaSelect" disabled>
-      <option value="">Cargando...</option>
-    </select>
-  </div>
+  <!-- Barra inferior - Jugador actual -->
+  <footer class="footer glass fixed bottom-0 left-0 right-0 mx-auto w-full max-w-4xl flex justify-between items-center px-6 py-3 rounded-t-lg shadow-lg">
+    <span>Turno de: <strong id="current-player"></strong></span>
+    <button id="btn-pausa" class="btn pause">⏸ Pausa</button>
+  </footer>
 
-  <!-- Carta con flip -->
-  <div class="flip-card">
-    <div class="flip-card-inner" id="cardInner" backgrouund-image="url('/img/Cardlogo.png')>
-      <div class="flip-card-front">
-        <p class="title">Carta</p>
-        <p>Haz click en "Repartir"</p>
-      </div>
-      <div class="flip-card-back">
-        <p id="retoTexto">Aquí aparecerá tu reto...</p>
-      </div>
+  <!-- Modal Pausa -->
+  <div id="pause-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>Juego en Pausa</h2>
+      <button id="resume-game" class="btn green">Reanudar</button>
+      <button id="exit-game" class="btn red">Salir</button>
     </div>
   </div>
 
-  <!-- Botón para repartir -->
-  <div class="acciones">
-    <button id="btnRepartir">Repartir Carta</button>
-  </div>
-
-  <!-- Botón para volver al lobby -->
-  <div class="volver-lobby">
-    <button onclick="window.location.href='lobby.html'">← Volver al Lobby</button>
-  </div>
-
-  <script type="module" src="./Card.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="../SupabaseConection.js"></script>
+  <script type="module" src="../Audio-manager.js"></script>
+  <script type="module" src="Card.js"></script>
 </body>
 </html>

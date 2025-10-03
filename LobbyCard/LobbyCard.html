@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChallengeMe - Modo Ruleta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+  <link rel="stylesheet" href="LobbyCard.css">
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-4 relative">
+  <!-- Fondo - Asegurar que cubra toda la pantalla -->
+  <img src="/img/Secundarybackground.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
+  
+  <!-- Logo posicionado de forma equilibrada -->
+  <div class="absolute top-6 md:top-8 left-1/2 transform -translate-x-1/2 z-20">
+    <img src="/img/Mainlogo.png" alt="ChallengeMe Logo" class="h-40 w-40 md:h-44 md:w-44 object-contain mx-auto">
+  </div>
+  
+  <div class="container max-w-4xl mx-auto relative z-10 mt-28 md:mt-32">
+    <!-- Header vacío (solo para estructura) -->
+    <div class="text-center mb-6">
+      <!-- Espacio reservado -->
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="bg-gray-800 bg-opacity-90 rounded-xl p-6 mb-6 shadow-xl border border-gray-700">
+      <!-- Selección de Categoría -->
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-4 text-red-400 flex items-center">
+          <i class="fas fa-tag mr-2"></i> Categoría
+        </h3>
+        <div class="relative">
+          <select id="categoria-select" class="w-full bg-gray-700 border-2 border-gray-600 text-white py-3 px-4 pr-8 rounded-lg focus:outline-none focus:border-red-500 appearance-none">
+            <option value="">Selecciona una categoría</option>
+            <!-- Las categorías se cargarán dinámicamente -->
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div id="categoria-descripcion" class="mt-2 text-sm text-gray-400 italic hidden">
+          <!-- Descripción de la categoría seleccionada -->
+        </div>
+      </div>
+
+      <!-- Separador -->
+      <div class="border-t border-gray-700 my-6"></div>
+
+      <!-- Jugadores -->
+      <div>
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+          <h3 class="text-xl font-semibold text-red-400 flex items-center mb-4 md:mb-0">
+            <i class="fas fa-users mr-2"></i> Jugadores
+          </h3>
+          <div class="flex items-center">
+            <span class="mr-3 text-gray-300">Número de jugadores:</span>
+            <div class="flex items-center bg-gray-700 rounded-md overflow-hidden">
+              <button id="decrease-players" class="bg-red-600 hover:bg-red-700 text-white w-8 h-8 flex items-center justify-center transition-colors">
+                <i class="fas fa-minus text-xs"></i>
+              </button>
+              <span id="player-count" class="px-4 py-1 min-w-[2rem] text-center font-medium">4</span>
+              <button id="increase-players" class="bg-red-600 hover:bg-red-700 text-white w-8 h-8 flex items-center justify-center transition-colors">
+                <i class="fas fa-plus text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="jugadores-container">
+          <!-- Los jugadores se generarán dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de Jugar -->
+    <div class="text-center mt-8">
+      <button id="btn-jugar" class="bg-red-600 hover:bg-red-700 text-white text-xl font-semibold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+        <i class="fas fa-play mr-2"></i> Jugar
+      </button>
+    </div>
+  </div>
+
+  <!-- Elementos de audio para múltiples canciones (ocultos) -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/TARRUSRILEY-LETMEIN.mp3" type="audio/mpeg">
+  </audio>
+
+  <script type="module" src="LobbyCard.js"></script>
+  <script src="../Audio-manager.js"></script>
+</body>
+</html>

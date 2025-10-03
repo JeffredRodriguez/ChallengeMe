@@ -1,95 +1,400 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
-  background: #1e1e1e;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.game-container {
+  display: grid;
+  grid-template-columns: 22% 1fr 28%;
+  width: 100vw;
+  height: 100vh;
+  gap: 20px;
+  padding: 30px 0;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Sidebar (Podio) */
+.sidebar {
+  padding: 25px 18px;
+  min-width: 180px;
+}
+
+.sidebar-title {
+  font-size: 26px;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.player-card {
+  background: #222c;
+  padding: 12px 10px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px #0002;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.player-card.active {
+  border: 2px solid #ff4d4d;
+  box-shadow: 0 0 12px #ff4d4d55;
+}
+
+.player-card.correct {
+  border: 2px solid #00ff99;
+  box-shadow: 0 0 12px #00ff9955;
+}
+
+.player-card.incorrect {
+  border: 2px solid #ff2d55;
+  box-shadow: 0 0 12px #ff2d5555;
+}
+
+/* Centro - Carta */
+.main-game {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
-  min-height: 100vh;
-  padding-top: 30px;
+  justify-content: center;
 }
 
-.titulo {
-  font-size: 2.5em;
-  margin-bottom: 20px;
+.card-container {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
 }
 
-.categoria-container {
-  margin-bottom: 20px;
-}
-
-select {
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-.flip-card {
-  background-color: transparent;
-  width: 280px;
-  height: 350px;
+/* Contenedor de la carta (perspectiva 3D) */
+/* Contenedor de la carta (perspectiva 3D) */
+.game-card {
+  width: 340px;
+  height: 340px;
   perspective: 1000px;
-  margin: 20px 0;
+  cursor: pointer;
+  position: relative;
 }
 
-.flip-card-inner {
+/* Inner container para el flip */
+.card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
 
-.flip-card.flipped .flip-card-inner {
+/* Estado volteado */
+.card-inner.flipped {
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
-  box-shadow: 0 8px 14px rgba(0,0,0,0.3);
+/* Caras de la carta */
+.card-face {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 20px;
   backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
-.flip-card-front {
-  background: linear-gradient(135deg, #2c2c2c, #444);
-  color: coral;
+/* Frente con el logo */
+.card-front {
+  background: #000;
+  /* Frente visible por defecto */
 }
 
-.flip-card-back {
-  background: linear-gradient(135deg, #ff7f50, #ff5733);
+.card-image-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Reverso con el texto del reto */
+.card-back {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  transform: rotateY(180deg); /* Ya está girado 180 grados */
+  text-align: center;
   color: white;
+}
+
+/* El texto en el reverso NO necesita rotación adicional */
+.card-back .card-text {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Animación de volteo */
+.game-card.flip {
   transform: rotateY(180deg);
 }
 
-#retoTexto {
-  font-size: 1.2em;
-  line-height: 1.5;
+.game-card {
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
 }
 
-.acciones {
-  margin-top: 20px;
-}
 
-button {
-  background: coral;
-  color: white;
+/* Botones principales */
+.spin-btn,
+.btn.pause,
+#show-result,
+#btn-pausa {
+  background: #e53e3e !important;
+  color: #fff !important;
   border: none;
-  padding: 12px 20px;
-  font-size: 1.2em;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
+  box-shadow: none !important;
+  transition: background 0.2s, transform 0.2s;
 }
 
-button:hover {
-  background: #ff5733;
+.spin-btn:active,
+.btn.pause:active,
+#show-result:active,
+#btn-pausa:active {
+  background: #c53030 !important;
+  transform: scale(0.97);
+}
+
+.btn:disabled,
+.spin-btn:disabled {
+  background: #feb2b2 !important;
+  color: #fff5f5 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+/* Botones de resultado en el área principal */
+.result-buttons-container {
+  transition: all 0.3s ease;
+}
+
+.result-buttons-container:not(.hidden) {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Asegurar que los botones tengan buen estilo */
+.btn.green {
+  background: linear-gradient(90deg, #00ff99, #00c3ff);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 255, 153, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn.red {
+  background: linear-gradient(90deg, #ff4d4d, #ffb347);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+/* Panel derecho - Reto */
+.question-panel {
+  padding: 25px 18px;
+  min-width: 220px;
+}
+
+.challenge-area {
+  background: #222c;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #0002;
+}
+
+.challenge-area h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.btn {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn.green {
+  background: linear-gradient(90deg, #00ff99, #00c3ff);
+  color: #fff;
+}
+
+.btn.red {
+  background: linear-gradient(90deg, #ff4d4d, #ffb347);
+  color: #fff;
+}
+
+.btn.pause {
+  background: orange;
+  color: #fff;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.challenge-result {
+  margin-top: 18px;
+  padding: 12px;
+  background: #111c;
+  border-radius: 10px;
+}
+
+.result-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: rgba(0,0,0,0.18);
+  padding: 12px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0002;
+}
+
+/* Modal pausa */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #222c;
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 24px #0008;
+}
+
+/* Animaciones para cartas */
+@keyframes flipCard {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(90deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+}
+
+@keyframes drawCard {
+  0% {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.flip-animation {
+  animation: flipCard 0.6s ease-in-out;
+}
+
+.draw-animation {
+  animation: drawCard 0.5s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .game-card {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .card-text {
+    font-size: 1.1rem;
+    min-height: 100px;
+  }
 }

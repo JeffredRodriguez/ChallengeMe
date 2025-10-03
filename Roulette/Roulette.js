@@ -334,7 +334,7 @@ class RuletaGame {
 
     exitGame() {
         if (confirm('¿Estás seguro de que quieres salir? Se perderá el progreso actual.')) {
-            window.location.href = '/Lobby.html';
+            window.location.href = '/LobbyRoulette/Lobby.html';
         }
     }
 
@@ -352,7 +352,7 @@ class RuletaGame {
         alert(`¡Juego terminado! 🎉\n\nResultados:\n${resultsMessage}\n\n¡Ganador: ${winner.name} con ${winner.score} puntos!`);
 
         // Redirigir al lobby inmediatamente
-        window.location.href = '/Lobby.html';
+        window.location.href = '/LobbyRoulette/Lobby.html';
     }
 }
 
