@@ -93,8 +93,8 @@ body {
 
 /* Contenedor de la carta - MÁS ANGOSTO Y CON IMAGEN QUE CUBRE TODO */
 .game-card {
-  width: 320px;
-  height: 440px; /* Más alto que ancho para hacerlo más angosto */
+  width: 280px;
+  height: 400px; /* Más alto que ancho para hacerlo más angosto */
   perspective: 1000px;
   cursor: pointer;
   position: relative;
@@ -114,7 +114,6 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Caras de la carta */
 .card-face {
   position: absolute;
   width: 100%;
@@ -127,26 +126,21 @@ body {
   justify-content: center;
 }
 
-/* Frente con el logo - IMAGEN QUE CUBRE TODO EL ESPACIO */
-.card-front {
-  background: url('/img/Cardlogo.png') no-repeat center center;
-  padding: 0 !important; /* Elimina cualquier padding */
-  margin: 0 !important; /* Elimina cualquier margen */
-}
 
-.card-image-full {
+.card-front {
+  background: url('/img/IconPage.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Esto es clave - cubre todo el contenedor */
-  object-position: center; /* Centra la imagen */
-  border-radius: 20px;
-  display: block; /* Elimina espacios en blanco debajo de la imagen */
 }
+
 
 
 .card-front-bg {
-  background: url('/img/Cardlogo.png') no-repeat center center;
-  background-size: cover fixed;
+  background-size: cover;
+  background-attachment: fixed;
+
   border-radius: 0px;
 }
 
@@ -155,7 +149,7 @@ body {
 
 /* Reverso con el texto del reto */
 .card-back {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #709b9e 0%, #709b9e 100%);
   transform: rotateY(180deg);
   text-align: center;
   color: white;
