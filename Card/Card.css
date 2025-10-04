@@ -15,11 +15,11 @@ body {
 
 .game-container {
   display: grid;
-  grid-template-columns: 22% 1fr 28%;
+  grid-template-columns: 25% 50% 25%;
   width: 100vw;
   height: 100vh;
   gap: 20px;
-  padding: 30px 0;
+  padding: 30px;
 }
 
 /* Glassmorphism */
@@ -34,7 +34,7 @@ body {
 /* Sidebar (Podio) */
 .sidebar {
   padding: 25px 18px;
-  min-width: 180px;
+  min-width: 200px;
 }
 
 .sidebar-title {
@@ -82,6 +82,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .card-container {
@@ -90,11 +91,10 @@ body {
   position: relative;
 }
 
-/* Contenedor de la carta (perspectiva 3D) */
-/* Contenedor de la carta (perspectiva 3D) */
+/* Contenedor de la carta - MÁS ANGOSTO Y CON IMAGEN QUE CUBRE TODO */
 .game-card {
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 440px; /* Más alto que ancho para hacerlo más angosto */
   perspective: 1000px;
   cursor: pointer;
   position: relative;
@@ -125,53 +125,57 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
-/* Frente con el logo */
+/* Frente con el logo - IMAGEN QUE CUBRE TODO EL ESPACIO */
 .card-front {
-  background: #000;
-  /* Frente visible por defecto */
+  background: url('/img/Cardlogo.png') no-repeat center center;
+  padding: 0 !important; /* Elimina cualquier padding */
+  margin: 0 !important; /* Elimina cualquier margen */
 }
 
 .card-image-full {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Esto es clave - cubre todo el contenedor */
+  object-position: center; /* Centra la imagen */
   border-radius: 20px;
+  display: block; /* Elimina espacios en blanco debajo de la imagen */
 }
+
+
+.card-front-bg {
+  background: url('/img/Cardlogo.png') no-repeat center center;
+  background-size: cover fixed;
+  border-radius: 0px;
+}
+
+
+
 
 /* Reverso con el texto del reto */
 .card-back {
   background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-  transform: rotateY(180deg); /* Ya está girado 180 grados */
+  transform: rotateY(180deg);
   text-align: center;
   color: white;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* El texto en el reverso NO necesita rotación adicional */
-.card-back .card-text {
-  font-size: 1.1rem;
-  line-height: 1.4;
+.card-text {
+  font-size: 1.3rem;
+  line-height: 1.5;
   font-weight: 600;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  max-width: 100%;
 }
-
-/* Animación de volteo */
-.game-card.flip {
-  transform: rotateY(180deg);
-}
-
-.game-card {
-  transition: transform 0.8s ease-in-out;
-  transform-style: preserve-3d;
-}
-
 
 /* Botones principales */
 .spin-btn,
 .btn.pause,
-#show-result,
 #btn-pausa {
   background: #e53e3e !important;
   color: #fff !important;
@@ -182,7 +186,6 @@ body {
 
 .spin-btn:active,
 .btn.pause:active,
-#show-result:active,
 #btn-pausa:active {
   background: #c53030 !important;
   transform: scale(0.97);
@@ -245,23 +248,6 @@ body {
 .btn:active {
   transform: translateY(0);
 }
-/* Panel derecho - Reto */
-.question-panel {
-  padding: 25px 18px;
-  min-width: 220px;
-}
-
-.challenge-area {
-  background: #222c;
-  padding: 18px;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px #0002;
-}
-
-.challenge-area h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
 
 .btn {
   margin-top: 12px;
@@ -292,19 +278,6 @@ body {
 
 .btn:active {
   transform: scale(0.96);
-}
-
-.challenge-result {
-  margin-top: 18px;
-  padding: 12px;
-  background: #111c;
-  border-radius: 10px;
-}
-
-.result-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
 }
 
 /* Footer */
@@ -386,7 +359,7 @@ body {
   
   .game-card {
     width: 280px;
-    height: 280px;
+    height: 380px; /* Mantener proporción más angosta en móvil */
   }
   
   .card-title {

@@ -203,7 +203,6 @@ class CardGame {
             // Si está mostrando el frente, resetear texto y ocultar botones
             document.getElementById('card-text').textContent = "Haz clic para siguiente reto";
             document.getElementById('result-buttons-container').classList.add('hidden');
-            document.getElementById('challenge-area').classList.add('hidden');
         }
 
         this.isDrawing = false;
@@ -241,9 +240,6 @@ class CardGame {
         // MOSTRAR BOTONES DE RESULTADO
         document.getElementById('result-buttons-container').classList.remove('hidden');
 
-        // Ocultar el panel lateral de reto
-        document.getElementById('challenge-area').classList.add('hidden');
-
         // Guardar información del reto actual para los puntos
         this.currentChallenge = challenge;
     }
@@ -264,7 +260,7 @@ class CardGame {
             console.log(`✅ ${currentPlayer.name} completó el reto: +${points} puntos`);
             
             // Mostrar feedback visual
-            this.showFeedback('¡Correcto! +' + points + ' puntos', 'green');
+            this.showFeedback('¡Logrado! +' + points + ' puntos', 'green');
         } else {
             // Marcar jugador como incorrecto
             document.querySelectorAll('.player-card')[this.currentPlayerIndex].classList.add('incorrect');
