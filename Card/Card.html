@@ -13,17 +13,17 @@
   <!-- Fondo -->
   <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
 
-  <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
+  <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen w-full">
     <!-- Panel Izquierdo - Podio -->
-    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
+    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0 w-full max-w-md mx-auto md:mx-0">
       <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
       <div id="players-container" class="players-list w-full"></div>
     </aside>
 
     <!-- Centro - Carta -->
-    <main class="main-game col-span-3 flex flex-col items-center justify-center">
-      <div class="card-container flex flex-col items-center">
-        <div class="relative flex items-center justify-center">
+    <main class="main-game md:col-span-3 col-span-1 flex flex-col items-center justify-center w-full">
+      <div class="card-container flex flex-col items-center w-full">
+        <div class="relative flex items-center justify-center w-full">
           <!-- Contenedor de la carta -->
           <div class="game-card" id="game-card">
             <div class="card-inner" id="card-inner">
@@ -52,13 +52,12 @@
         <button id="next-card-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Siguiente Carta</button>
       </div>
 
-
-
       <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
         <h2 id="category-name" class="text-xl font-semibold mb-1">Categoría</h2>
         <p id="category-description" class="text-sm text-gray-200">Retos de la categoría seleccionada.</p>
       </div>
     </main>
+  </div>
 
   <!-- Barra inferior - Jugador actual -->
   <footer class="footer glass fixed bottom-0 left-0 right-0 mx-auto w-full max-w-4xl flex justify-between items-center px-6 py-3 rounded-t-lg shadow-lg">
