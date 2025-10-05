@@ -161,7 +161,11 @@ document.addEventListener("DOMContentLoaded", function() {
   
 });   
 
-
+// Agregar funcionalidad al botón de verificación de edad
+    document.getElementById('ageVerifyBtn').addEventListener('click', function() {
+      // Redirigir a la página de verificación de edad
+      window.location.href = './index.html';
+    });
 
 
 

@@ -17,10 +17,16 @@
 
   <!-- Botón hamburguesa -->
   <button id="menuBtn" 
-          class="fixed top-4 left-4 z-50 p-2 rounded-lg shadow-lg transition">
+          class="fixed top-4 left-4 z-50 p-2 rounded-lg transition">
     <img src="/img/Iconmenu.png" alt="Menú" class="w-8 h-8"/>
   </button>
 
+  <!-- Botón de verificación de edad -->
+<button id="ageVerifyBtn" 
+        class="fixed top-4 right-4 z-50 p-2 rounded-lg shadow-lg transition bg-red-600 hover:bg-red-700 flex items-center gap-2">
+  <i class="fas fa-user-shield text-white text-lg"></i>
+  <span class="text-white text-sm font-medium">Verificar Edad</span>
+</button>
   <!-- Sidebar -->
   <aside id="sidebar"
          class="sidebar fixed top-0 left-0 h-full bg-red-600 flex flex-col items-center py-6">
@@ -155,5 +161,6 @@
   
   <script src="Principal.js"></script>
   <script src="audio-manager.js"></script>
+  
 </body>
 </html>

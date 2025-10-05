@@ -7,32 +7,6 @@
   <link rel="stylesheet" href="Info.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
-   <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-    body {
-      font-family: 'Montserrat', sans-serif;
-    }
-    .section-title {
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    .section-title:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 80%;
-      width: 5px;
-      background: linear-gradient(to bottom, #ef4444, #f97316);
-      border-radius: 3px;
-    }
-    .back-button {
-      transition: all 0.3s ease;
-    }
-    .back-button:hover {
-      transform: translateX(-5px);
-    }
-  </style>
 </head>
 <body class="bg-gray-900 text-white min-h-screen py-8 px-4">
   <div class="max-w-4xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl shadow-2xl overflow-hidden">
@@ -54,25 +28,25 @@
             <span class="mr-3 text-red-400">1.</span>
             <span>Introducción</span>
           </a>
-          <a href="#requisitos" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+          <a href="#verificacion-edad" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">2.</span>
-            <span>Requisitos del Sistema</span>
+            <span>Verificación de Edad</span>
           </a>
-          <a href="#pantalla-principal" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+          <a href="#seleccion-jugadores" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">3.</span>
-            <span>Pantalla Principal</span>
+            <span>Selección de Jugadores</span>
           </a>
           <a href="#modos-juego" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">4.</span>
             <span>Modos de Juego</span>
           </a>
-          <a href="#menu-lateral" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+          <a href="#modo-carta" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">5.</span>
-            <span>Menú Lateral</span>
+            <span>Modo Carta</span>
           </a>
-          <a href="#controles" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
+          <a href="#modo-ruleta" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">6.</span>
-            <span>Controles</span>
+            <span>Modo Ruleta</span>
           </a>
           <a href="#preguntas-frecuentes" class="bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition duration-300 flex items-center">
             <span class="mr-3 text-red-400">7.</span>
@@ -90,41 +64,43 @@
         <h2 class="section-title text-2xl font-bold mb-4">INTRODUCCIÓN</h2>
         <div class="bg-gray-700 p-6 rounded-lg">
           <p class="mb-4">
-            <strong>ChallengeMe</strong> es una plataforma de juegos interactiva que ofrece diferentes modos de desafíos. Diseñada con una interfaz moderna y atractiva, permite a los usuarios disfrutar de experiencias gaming únicas con efectos visuales inmersivos.
+            <strong>ChallengeMe</strong> es una plataforma de juegos interactiva que ofrece diferentes modos de desafíos y retos. Diseñada con una interfaz moderna y atractiva, permite a los usuarios disfrutar de experiencias gaming únicas donde podrán poner a prueba sus conocimientos y habilidades.
           </p>
           <p>
-            Con una estética visual cautivadora y efectos de sonido envolventes, ChallengeMe te transporta a un mundo de retos y diversión donde podrás poner a prueba tus habilidades y competir contra ti mismo o contra otros jugadores.
+            Con una estética visual cautivadora, ChallengeMe te transporta a un mundo de retos y diversión donde podrás competir con amigos en diferentes categorías y modos de juego, desde preguntas de trivia hasta desafíos divertidos.
           </p>
         </div>
       </section>
 
-      <!-- Requisitos del Sistema -->
-      <section id="requisitos" class="mb-10">
-        <h2 class="section-title text-2xl font-bold mb-4">REQUISITOS DEL SISTEMA</h2>
+      <!-- Verificación de Edad -->
+      <section id="verificacion-edad" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">VERIFICACIÓN DE EDAD</h2>
         <div class="bg-gray-700 p-6 rounded-lg">
-          <ul class="list-disc pl-6 space-y-2">
-            <li><strong>Navegador web actualizado</strong> (Chrome 70+, Firefox 65+, Safari 12+, Edge 79+)</li>
-            <li><strong>Conexión a Internet</strong> (para cargar recursos iniciales)</li>
-            <li><strong>Resolución mínima recomendada</strong>: 320px × 480px</li>
-            <li><strong>JavaScript habilitado</strong> en el navegador</li>
-            <li><strong>Almacenamiento local</strong> habilitado para guardar preferencias</li>
-          </ul>
+          <p class="mb-4">Al acceder a ChallengeMe, el primer paso es la verificación de edad:</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Selecciona "SÍ, SOY MAYOR DE EDAD"</strong> si tienes 18 años o más</li>
+            <li><strong>Selecciona "NO, SOY MENOR DE EDAD"</strong> si eres menor de 18 años</li>
+            <li><strong>Acepta los Términos y Condiciones</strong> marcando la casilla correspondiente</li>
+          </ol>
+          <div class="mt-4 p-4 bg-gray-600 rounded-lg">
+            <p class="text-sm italic">💡 Importante: Esta verificación es necesaria para garantizar una experiencia de juego apropiada para cada edad.</p>
+          </div>
         </div>
       </section>
 
-      <!-- Pantalla Principal -->
-      <section id="pantalla-principal" class="mb-10">
-        <h2 class="section-title text-2xl font-bold mb-4">PANTALLA PRINCIPAL</h2>
+      <!-- Selección de Jugadores -->
+      <section id="seleccion-jugadores" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">SELECCIÓN DE JUGADORES</h2>
         <div class="bg-gray-700 p-6 rounded-lg">
-          <p class="mb-4">Al abrir ChallengeMe, encontrarás:</p>
+          <p class="mb-4">Antes de comenzar a jugar, debes configurar los jugadores:</p>
           <ol class="list-decimal pl-6 space-y-2">
-            <li><strong>Fondo inmersivo</strong>: Imagen de fondo con efecto opaco que crea ambiente gaming</li>
-            <li><strong>Opciones de juego</strong>: Tres tarjetas con diferentes modos de juego</li>
-            <li><strong>Texto decorativo</strong>: Título "CHALLENGEME" con efecto visual de fondo</li>
-            <li><strong>Botón de menú</strong>: En la esquina superior izquierda para acceder a más opciones</li>
+            <li><strong>Selecciona el número de jugadores</strong> (hasta 8 jugadores)</li>
+            <li><strong>Configura los nombres</strong> de cada jugador (opcional)</li>
+            <li><strong>Elige una categoría</strong> de preguntas para el juego</li>
+            <li><strong>Confirma la selección</strong> para comenzar el juego</li>
           </ol>
           <div class="mt-4 p-4 bg-gray-600 rounded-lg">
-            <p class="text-sm italic">💡 Consejo: Explora cada elemento de la interfaz para descubrir efectos visuales sorprendentes al interactuar con ellos.</p>
+            <p class="text-sm italic">🎮 Consejo: Puedes personalizar los nombres de los jugadores para una experiencia más personalizada.</p>
           </div>
         </div>
       </section>
@@ -137,9 +113,9 @@
             <h3 class="text-xl font-semibold mb-2 text-red-300">1. Modo Carta</h3>
             <ul class="list-disc pl-6">
               <li><strong>Icono</strong>: Imagen de carta</li>
-              <li><strong>Descripción</strong>: Juego basado en cartas con desafíos y preguntas</li>
+              <li><strong>Descripción</strong>: Juego basado en cartas con desafíos por categorías</li>
               <li><strong>Estado</strong>: Disponible</li>
-              <li><strong>Interacción</strong>: Clic para comenzar a jugar</li>
+              <li><strong>Interacción</strong>: Click para comenzar a jugar</li>
             </ul>
           </div>
 
@@ -147,9 +123,9 @@
             <h3 class="text-xl font-semibold mb-2 text-red-300">2. Modo Ruleta</h3>
             <ul class="list-disc pl-6">
               <li><strong>Icono</strong>: Imagen de ruleta</li>
-              <li><strong>Descripción</strong>: Juego de azar con ruleta temática</li>
+              <li><strong>Descripción</strong>: Juego de azar con ruleta temática y preguntas variadas</li>
               <li><strong>Estado</strong>: Disponible</li>
-              <li><strong>Interacción</strong>: Clic para comenzar a jugar</li>
+              <li><strong>Interacción</strong>: Click para comenzar a jugar</li>
             </ul>
           </div>
 
@@ -165,56 +141,41 @@
         </div>
       </section>
 
-      <!-- Menú Lateral -->
-      <section id="menu-lateral" class="mb-10">
-        <h2 class="section-title text-2xl font-bold mb-4">MENÚ LATERAL</h2>
+      <!-- Modo Carta -->
+      <section id="modo-carta" class="mb-10">
+        <h2 class="section-title text-2xl font-bold mb-4">MODO CARTA</h2>
         <div class="bg-gray-700 p-6 rounded-lg">
-          <p class="mb-4">Accede al menú lateral haciendo clic en el botón ☰ superior izquierdo:</p>
-          
-          <div class="mb-4">
-            <h3 class="text-xl font-semibold mb-2 text-red-300">Opciones disponibles:</h3>
-            <div class="grid gap-4 mt-4">
-              <div class="bg-gray-600 p-4 rounded-lg">
-                <h4 class="font-semibold mb-1">1. Información (Icono ⓘ)</h4>
-                <p class="text-sm">- Detalles sobre la aplicación<br>- Información de los desarrolladores</p>
-              </div>
-              
-              <div class="bg-gray-600 p-4 rounded-lg">
-                <h4 class="font-semibold mb-1">2. Configuración (Icono ⚙️)</h4>
-                <p class="text-sm">- Ajustes de sonido<br>- Preferencias visuales<br>- Opciones de accesibilidad</p>
-              </div>
-              
-              <div class="bg-gray-600 p-4 rounded-lg">
-                <h4 class="font-semibold mb-1">3. Compartir (Icono ↗️)</h4>
-                <p class="text-sm">- Compartir la aplicación con amigos<br>- Opciones para redes sociales</p>
-              </div>
-            </div>
+          <p class="mb-4">En el Modo Carta, los jugadores se enfrentan a diferentes tipos de desafíos:</p>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Podio de puntuaciones</strong>: Muestra los puntos de cada jugador</li>
+            <li><strong>Desafíos divertidos</strong>: Como "Habla como un bebé por 1 minuto"</li>
+            <li><strong>Sistema de puntuación</strong>: Completa = puntos según la dificultad, Falle = sin puntos</li>
+            <li><strong>Turnos rotativos</strong>: Indica claramente el turno de cada jugador</li>
+            <li><strong>Controles</strong>: Botones "Completado" y "Falle" para registrar resultados</li>
+          </ol>
+          <div class="mt-4 p-4 bg-gray-600 rounded-lg">
+            <p class="text-sm italic">🃏 Consejo: Presiona "Siguiente Carta" para avanzar al siguiente desafío una vez registrado el resultado.</p>
           </div>
         </div>
       </section>
 
-      <!-- Controles -->
-      <section id="controles" class="mb-10">
-        <h2 class="section-title text-2xl font-bold mb-4">CONTROLES</h2>
-        <div class="bg-gray-700 p-6 rounded-lg">
-          <div class="mb-6">
-            <h3 class="text-xl font-semibold mb-2 text-red-300">Navegación principal:</h3>
-            <ul class="list-disc pl-6">
-              <li><strong>Clic/tap</strong>: Seleccionar modo de juego o opción de menú</li>
-              <li><strong>Botón menú</strong>: ☰ en esquina superior izquierda</li>
-              <li><strong>Scroll</strong>: Desplazamiento en dispositivos móviles</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="text-xl font-semibold mb-2 text-red-300">Interacciones específicas:</h3>
-            <ul class="list-disc pl-6">
-              <li><strong>Hover (escritorio)</strong>: Efectos visuales en tarjetas de juego</li>
-              <li><strong>Clic fuera del menú</strong>: Cierra el menú lateral automáticamente</li>
-            </ul>
-          </div>
+      <!-- Modo Ruleta -->
+     <section id="modo-ruleta" class="mb-10">
+    <h2 class="section-title text-2xl font-bold mb-4">MODO RULETA</h2>
+    <div class="bg-gray-700 p-6 rounded-lg">
+        <p class="mb-4">El Modo Ruleta combina azar con preguntas de conocimiento:</p>
+        <ol class="list-decimal pl-6 space-y-2">
+            <li><strong>Gira la ruleta</strong>: Para determinar el tipo de pregunta</li>
+            <li><strong>Preguntas por categorías</strong>: Como "Capitales" con diferentes dificultades</li>
+            <li><strong>Sistema de verificación</strong>: "Ver respuesta" para comprobar si acertaste</li>
+            <li><strong>Controles de respuesta</strong>: ✅ Para marcar que el jugador respondió correctamente, ❌ para marcar que el jugador respondió incorrectamente</li>
+            <li><strong>Controles de juego</strong>: Pausa y gestión de turnos</li>
+        </ol>
+        <div class="mt-4 p-4 bg-gray-600 rounded-lg">
+            <p class="text-sm italic">🎯 Consejo: Las preguntas tienen diferentes niveles de dificultad (Fácil, Medio, Difícil) que afectan la puntuación.</p>
         </div>
-      </section>
+    </div>
+</section>
 
       <!-- Preguntas Frecuentes -->
       <section id="preguntas-frecuentes" class="mb-10">
@@ -226,13 +187,13 @@
           </div>
 
           <div class="mb-6">
-            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Cómo cierro el menú lateral?</h3>
-            <p>Puedes hacer clic en el botón de menú nuevamente o hacer clic en cualquier área fuera del menú.</p>
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Cómo funciona el sistema de puntuación?</h3>
+            <p>Cada desafío completado otorga puntos. En el Modo Carta, los jugadores ganan puntos al completar desafíos; en el Modo Ruleta, los puntos dependen de la dificultad de la pregunta acertada.</p>
           </div>
 
           <div class="mb-6">
-            <h3 class="text-lg font-semibold mb-2 text-red-300">¿La aplicación guarda mi progreso?</h3>
-            <p>El progreso se gestiona según el modo de juego. Algunos modos pueden guardar automáticamente, mientras que otros pueden requerir que completes sesiones individuales.</p>
+            <h3 class="text-lg font-semibold mb-2 text-red-300">¿Puedo cambiar de jugador durante el juego?</h3>
+            <p>Los turnos rotan automáticamente después de cada ronda. El juego indica claramente de quién es el turno actual.</p>
           </div>
 
           <div class="mb-6">
@@ -242,7 +203,7 @@
 
           <div>
             <h3 class="text-lg font-semibold mb-2 text-red-300">¿Necesito crear una cuenta?</h3>
-            <p>No, puedes comenzar a jugar inmediatamente sin registro.</p>
+            <p>No, puedes comenzar a jugar inmediatamente sin registro después de la verificación de edad.</p>
           </div>
         </div>
       </section>
@@ -260,7 +221,7 @@
           </ol>
           
           <div class="mt-6 p-4 bg-red-900 bg-opacity-40 border-l-4 border-red-500 rounded">
-            <p class="text-sm">Para reportar bugs o sugerir características, utiliza la opción de "Información" en el menú lateral.</p>
+            <p class="text-sm">Para reportar bugs o sugerir características, contacta al soporte técnico a través de la información de contacto proporcionada en la aplicación.</p>
           </div>
         </div>
       </section>
@@ -268,17 +229,17 @@
       <!-- Footer -->
       <div class="border-t border-gray-700 pt-6 text-center">
         <p class="text-lg font-semibold text-red-400">¡Disfruta de ChallengeMe y prepárate para aceptar el desafío!</p>
-        <p class="text-sm text-gray-400 mt-2">Última actualización: Noviembre 2023</p>
+        <p class="text-sm text-gray-400 mt-2">Última actualización: Octubre 2024</p>
         
         <a href="javascript:history.back()" class="inline-flex items-center mt-6 text-red-400 hover:text-red-300 transition back-button">
           <span>← Volver a la aplicación</span>
         </a>
       </div>
     </div>
-  </div>  
-<!-- Al final del body, antes de cerrar </body> -->
-<!-- Modal de audio (mismo que en index.html) -->
-<div id="audioModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+  </div>
+
+  <!-- Modal de audio -->
+  <div id="audioModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
     <div class="bg-gray-800 rounded-xl p-6 w-11/12 max-w-md relative">
         <button id="closeAudioModal" class="absolute top-4 right-4 text-white text-xl">
             <i class="fas fa-times"></i>
@@ -305,21 +266,21 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
 
-<!-- Elementos de audio para múltiples canciones (ocultos) -->
-<audio id="backgroundMusic1">
-  <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
-</audio>
-<audio id="backgroundMusic2">
-  <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
-</audio>
-<audio id="backgroundMusic3">
-  <source src="/aud/song3.mp3" type="audio/mpeg">
-</audio>
+  <!-- Elementos de audio para múltiples canciones (ocultos) -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/song3.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- Scripts -->
-<script src="audio-manager.js"></script>
+  <!-- Scripts -->
+  <script src="audio-manager.js"></script>
 
 </body>
 </html>
