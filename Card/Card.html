@@ -46,7 +46,7 @@
           </button>
           <button id="btn-failed-main" class="btn red px-6 py-3 rounded-lg font-bold">
             ✘ Fallo
-          </button>
+          </button> 
         </div>
 
         <button id="next-card-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Siguiente Carta</button>
@@ -73,11 +73,21 @@
       <button id="exit-game" class="btn red">Salir</button>
     </div>
   </div>
+  <!-- Audios -->
+  <audio id="backgroundMusic1">
+    <source src="/aud/BigXthaPlug - Texas (Lyrics).mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/mpeg">
+  </audio>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script type="module" src="../SupabaseConection.js"></script>
-  <script type="module" src="../Audio-manager.js"></script>
+  <script type="module" src="/Audio-manager.js"></script>
   <script type="module" src="Card.js"></script>
 </body>
 </html>

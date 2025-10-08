@@ -11,23 +11,28 @@
   <link rel="stylesheet" href="LobbyCard.css">
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-4 relative">
-  <!-- Fondo - Asegurar que cubra toda la pantalla -->
+  <!-- Fondo -->
   <img src="/img/Secundarybackground.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
   
-  <!-- Logo posicionado de forma equilibrada -->
-  <div class="absolute top-6 md:top-8 left-1/2 transform -translate-x-1/2 z-20">
+  <!-- Botón volver -->
+  <a href="/principal.html" class="fixed top-6 left-6 z-20 bg-gray-800 hover:bg-gray-700 text-white py-3 px-4 rounded-full transition-all transform hover:scale-105 shadow-lg flex items-center space-x-2">
+    <i class="fas fa-arrow-left text-lg"></i>
+    <span class="font-medium">Volver</span>
+  </a>
+
+  <!-- Logo subido 10px -->
+  <div class="absolute top-4 md:top-0 left-1/2 transform -translate-x-1/2 z-20">
     <img src="/img/Mainlogo.png" alt="ChallengeMe Logo" class="h-40 w-40 md:h-44 md:w-44 object-contain mx-auto">
   </div>
   
-  <div class="container max-w-4xl mx-auto relative z-10 mt-28 md:mt-32">
-    <!-- Header vacío (solo para estructura) -->
-    <div class="text-center mb-6">
-      <!-- Espacio reservado -->
-    </div>
-
-    <!-- Contenedor principal -->
+  <!-- Contenedor principal subido 10px -->
+  <div class="container max-w-4xl mx-auto relative z-10 mt-24 md:mt-28">
+    <!-- Header vacío -->
+    <div class="text-center mb-6"></div>
+    
+    <!-- Contenedor -->
     <div class="bg-gray-800 bg-opacity-90 rounded-xl p-6 mb-6 shadow-xl border border-gray-700">
-      <!-- Selección de Categoría -->
+      <!-- Categoría -->
       <div class="mb-8">
         <h3 class="text-xl font-semibold mb-4 text-red-400 flex items-center">
           <i class="fas fa-tag mr-2"></i> Categoría
@@ -35,15 +40,12 @@
         <div class="relative">
           <select id="categoria-select" class="w-full bg-gray-700 border-2 border-gray-600 text-white py-3 px-4 pr-8 rounded-lg focus:outline-none focus:border-red-500 appearance-none">
             <option value="">Selecciona una categoría</option>
-            <!-- Las categorías se cargarán dinámicamente -->
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
             <i class="fas fa-chevron-down"></i>
           </div>
         </div>
-        <div id="categoria-descripcion" class="mt-2 text-sm text-gray-400 italic hidden">
-          <!-- Descripción de la categoría seleccionada -->
-        </div>
+        <div id="categoria-descripcion" class="mt-2 text-sm text-gray-400 italic hidden"></div>
       </div>
 
       <!-- Separador -->
@@ -69,13 +71,11 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="jugadores-container">
-          <!-- Los jugadores se generarán dinámicamente -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="jugadores-container"></div>
       </div>
     </div>
 
-    <!-- Botón de Jugar -->
+    <!-- Botón Jugar -->
     <div class="text-center mt-8">
       <button id="btn-jugar" class="bg-red-600 hover:bg-red-700 text-white text-xl font-semibold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
         <i class="fas fa-play mr-2"></i> Jugar
@@ -83,18 +83,18 @@
     </div>
   </div>
 
-  <!-- Elementos de audio para múltiples canciones (ocultos) -->
+  <!-- Audios -->
   <audio id="backgroundMusic1">
-    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/wav">
+    <source src="/aud/BigXthaPlug - Texas (Lyrics).mp3" type="audio/wav">
   </audio>
   <audio id="backgroundMusic2">
     <source src="/aud/Sport Trap Dark Beat by Infraction [No Copyright Music] _ Brutal Ethnic [fRvM2FSNra4].mp3" type="audio/mpeg">
   </audio>
   <audio id="backgroundMusic3">
-    <source src="/aud/TARRUSRILEY-LETMEIN.mp3" type="audio/mpeg">
+    <source src="/aud/Clubbing Rave Angelcore by Infraction, teefnbl, Alexi Action [No Copyright Music]_ Give Me Your Hand [xRK9Xdf1-80].mp3" type="audio/mpeg">
   </audio>
 
   <script type="module" src="LobbyCard.js"></script>
-  <script src="../Audio-manager.js"></script>
+  <script src="/Audio-manager.js"></script>
 </body>
 </html>
