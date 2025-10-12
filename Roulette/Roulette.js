@@ -161,7 +161,16 @@ class RuletaGame {
         // Botones de pausa
         document.getElementById('btn-pausa').addEventListener('click', () => this.pauseGame());
         document.getElementById('resume-game').addEventListener('click', () => this.resumeGame());
-        document.getElementById('exit-game').addEventListener('click', () => this.exitGame());
+        document.getElementById('exit-game').addEventListener('click', () => this.showExitConfirmation());
+
+        // Botones de confirmación de salida
+        document.getElementById('confirm-exit').addEventListener('click', () => this.exitGame());
+        document.getElementById('cancel-exit').addEventListener('click', () => this.hideExitConfirmation());
+
+        // Botón de continuar en el modal de ganadores
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            window.location.href = '/LobbyRoulette/Lobby.html';
+        });
     }
 
     startGame() {
@@ -332,27 +341,140 @@ class RuletaGame {
         document.getElementById('pause-modal').classList.add('hidden');
     }
 
+    showExitConfirmation() {
+        document.getElementById('exit-confirm-modal').classList.remove('hidden');
+    }
+
+    hideExitConfirmation() {
+        document.getElementById('exit-confirm-modal').classList.add('hidden');
+    }
+
     exitGame() {
-        if (confirm('¿Estás seguro de que quieres salir? Se perderá el progreso actual.')) {
-            window.location.href = '/LobbyRoulette/Lobby.html';
-        }
+        window.location.href = '/LobbyRoulette/Lobby.html';
     }
 
     endGame() {
-        // Determinar ganador
-        const winner = this.gameConfig.players.reduce((prev, current) =>
-            (prev.score > current.score) ? prev : current
-        );
+        // Ordenar jugadores por puntuación (de mayor a menor)
+        const sortedPlayers = [...this.gameConfig.players].sort((a, b) => b.score - a.score);
 
-        // Mostrar resultados finales
-        const resultsMessage = this.gameConfig.players
-            .map(player => `${player.name}: ${player.score} puntos`)
-            .join('\n');
+        // Mostrar modal de ganadores
+        this.showWinnersModal(sortedPlayers);
+    }
 
-        alert(`¡Juego terminado! 🎉\n\nResultados:\n${resultsMessage}\n\n¡Ganador: ${winner.name} con ${winner.score} puntos!`);
+    showWinnersModal(sortedPlayers) {
+        const modal = document.getElementById('winners-modal');
+        const winnersList = document.getElementById('winners-list');
+        
+        // Limpiar lista anterior
+        winnersList.innerHTML = '';
 
-        // Redirigir al lobby inmediatamente
-        window.location.href = '/LobbyRoulette/Lobby.html';
+        // Actualizar podio
+        if (sortedPlayers.length > 0) {
+            document.getElementById('first-place-name').textContent = sortedPlayers[0].name;
+        }
+        if (sortedPlayers.length > 1) {
+            document.getElementById('second-place-name').textContent = sortedPlayers[1].name;
+        }
+        if (sortedPlayers.length > 2) {
+            document.getElementById('third-place-name').textContent = sortedPlayers[2].name;
+        }
+
+        // Crear tarjetas para todos los jugadores
+        sortedPlayers.forEach((player, index) => {
+            const winnerCard = document.createElement('div');
+            winnerCard.className = `winner-card ${index === 0 ? 'first-place' : ''}`;
+            winnerCard.innerHTML = `
+                <div class="winner-position">${index + 1}°</div>
+                <div class="winner-name">${player.name}</div>
+                <div class="winner-score">${player.score} pts</div>
+            `;
+            winnersList.appendChild(winnerCard);
+        });
+
+        // Mostrar modal con animación
+        setTimeout(() => {
+            modal.classList.add('active');
+            this.createConfetti();
+        }, 500);
+    }
+
+    createConfetti() {
+        const modal = document.getElementById('winners-modal');
+        
+        // Crear confeti
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Colores aleatorios
+            const colors = ['#ff4d4d', '#ffb347', '#00ff99', '#00c3ff', '#a78bfa', '#fbbf24'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Posición y animación aleatoria
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            
+            // Agregar animación de caída
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            modal.appendChild(confetti);
+            
+            // Eliminar confeti después de la animación
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, 5000);
+        }
+    }
+
+    useFallbackQuestions() {
+        console.log('Usando preguntas de respaldo...');
+        // Preguntas de ejemplo para cuando no hay conexión a Supabase
+        this.questions = [
+            {
+                pregunta: "¿Cuál es la capital de Francia?",
+                respuesta_correcta: "París",
+                dificultad: "fácil",
+                categoria_id: this.gameConfig.category
+            },
+            {
+                pregunta: "¿En qué año llegó el hombre a la luna?",
+                respuesta_correcta: "1969",
+                dificultad: "media",
+                categoria_id: this.gameConfig.category
+            },
+            {
+                pregunta: "¿Quién escribió 'Cien años de soledad'?",
+                respuesta_correcta: "Gabriel García Márquez",
+                dificultad: "media",
+                categoria_id: this.gameConfig.category
+            },
+            {
+                pregunta: "¿Cuál es el elemento químico con símbolo 'O'?",
+                respuesta_correcta: "Oxígeno",
+                dificultad: "fácil",
+                categoria_id: this.gameConfig.category
+            },
+            {
+                pregunta: "¿Cuál es el río más largo del mundo?",
+                respuesta_correcta: "Amazonas",
+                dificultad: "difícil",
+                categoria_id: this.gameConfig.category
+            }
+        ];
+        
+        console.log(`Se cargaron ${this.questions.length} preguntas de respaldo`);
     }
 }
 
