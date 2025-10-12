@@ -13,10 +13,10 @@
   <!-- Fondo - Asegurar que cubra toda la pantalla -->
   <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
   
-  <!-- Modal de Ganadores -->
+  <!-- Modal de Ganadores CORREGIDO -->
   <div id="winners-modal" class="winners-modal">
     <div class="winners-content glass">
-      <span class="trophy-icon">🏆</span>
+      
       <h1 class="winners-title">¡Juego Terminado!</h1>
       
       <div class="podium">
@@ -34,12 +34,16 @@
         </div>
       </div>
       
-      <h2 class="text-xl mb-4">Resultados Finales</h2>
-      <div id="winners-list" class="winners-list">
-        <!-- Los ganadores se insertarán aquí dinámicamente -->
+      <div class="winners-list-container">
+        <h2 class="winners-list-title">Clasificación Completa</h2>
+        <div id="winners-list" class="winners-list">
+          <!-- Los ganadores se insertarán aquí dinámicamente -->
+        </div>
       </div>
       
-      <button id="continue-btn" class="continue-btn">Volver al Lobby</button>
+      <div class="winners-button-container">
+        <button id="continue-btn" class="continue-btn">Volver al Lobby</button>
+      </div>
     </div>
   </div>
 

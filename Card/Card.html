@@ -13,35 +13,39 @@
   <!-- Fondo -->
   <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
 
-  <!-- Modal de Ganadores -->
-  <div id="winners-modal" class="winners-modal">
-    <div class="winners-content glass">
-      <span class="trophy-icon">🏆</span>
-      <h1 class="winners-title">¡Juego Terminado!</h1>
-      
-      <div class="podium">
-        <div class="podium-step first">
-          <div class="podium-player" id="first-place-name">-</div>
-          <div class="winner-position">1°</div>
-        </div>
-        <div class="podium-step second">
-          <div class="podium-player" id="second-place-name">-</div>
-          <div class="winner-position">2°</div>
-        </div>
-        <div class="podium-step third">
-          <div class="podium-player" id="third-place-name">-</div>
-          <div class="winner-position">3°</div>
-        </div>
+<!-- Modal de Ganadores (solo modifica esta parte) -->
+<div id="winners-modal" class="winners-modal">
+  <div class="winners-content glass">
+    
+    <h1 class="winners-title">¡Juego Terminado!</h1>
+    
+    <div class="podium">
+      <div class="podium-step first">
+        <div class="podium-player" id="first-place-name">-</div>
+        <div class="winner-position">1°</div>
       </div>
-      
-      <h2 class="text-xl mb-4">Resultados Finales</h2>
-      <div id="winners-list" class="winners-list">
-        <!-- Los ganadores se insertarán aquí dinámicamente -->
+      <div class="podium-step second">
+        <div class="podium-player" id="second-place-name">-</div>
+        <div class="winner-position">2°</div>
       </div>
-      
+      <div class="podium-step third">
+        <div class="podium-player" id="third-place-name">-</div>
+        <div class="winner-position">3°</div>
+      </div>
+    </div>
+    
+    <h2 class="text-xl mb-2">Clasificación Completa</h2>
+    <div id="winners-list" class="winners-list">
+      <!-- Los ganadores se insertarán aquí dinámicamente -->
+    </div>
+    
+    <!-- Contenedor específico para el botón -->
+    <div class="winners-button-container">
       <button id="continue-btn" class="continue-btn">Volver al Lobby</button>
     </div>
   </div>
+</div>
+
 
   <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen w-full">
     <!-- Panel Izquierdo - Podio -->
