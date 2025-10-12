@@ -13,6 +13,36 @@
   <!-- Fondo -->
   <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
 
+  <!-- Modal de Ganadores -->
+  <div id="winners-modal" class="winners-modal">
+    <div class="winners-content glass">
+      <span class="trophy-icon">🏆</span>
+      <h1 class="winners-title">¡Juego Terminado!</h1>
+      
+      <div class="podium">
+        <div class="podium-step first">
+          <div class="podium-player" id="first-place-name">-</div>
+          <div class="winner-position">1°</div>
+        </div>
+        <div class="podium-step second">
+          <div class="podium-player" id="second-place-name">-</div>
+          <div class="winner-position">2°</div>
+        </div>
+        <div class="podium-step third">
+          <div class="podium-player" id="third-place-name">-</div>
+          <div class="winner-position">3°</div>
+        </div>
+      </div>
+      
+      <h2 class="text-xl mb-4">Resultados Finales</h2>
+      <div id="winners-list" class="winners-list">
+        <!-- Los ganadores se insertarán aquí dinámicamente -->
+      </div>
+      
+      <button id="continue-btn" class="continue-btn">Volver al Lobby</button>
+    </div>
+  </div>
+
   <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen w-full">
     <!-- Panel Izquierdo - Podio -->
     <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0 w-full max-w-md mx-auto md:mx-0">
@@ -74,7 +104,19 @@
     </div>
   </div>
 
-    <!-- Audios -->
+  <!-- Modal Confirmación Salir -->
+  <div id="exit-confirm-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>¿Estás seguro de que quieres salir?</h2>
+      <p class="my-4">Se perderá el progreso actual del juego.</p>
+      <div class="flex gap-4 justify-center">
+        <button id="confirm-exit" class="btn red">Sí, salir</button>
+        <button id="cancel-exit" class="btn green">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audios -->
   <audio id="backgroundMusic1">
     <source src="/aud/Bass Electronic Music] Helkimer 🇦🇴 - Flow.mp3" type="audio/wav">
   </audio>
