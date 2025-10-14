@@ -259,7 +259,7 @@ class CardGame {
         const currentPlayer = this.gameConfig.players[this.currentPlayerIndex];
 
         if (isCompleted) {
-            // Puntos basados en dificultad
+            // Puntos basados en dificultad - MODIFICADO
             const points = this.getPointsByDifficulty(this.currentChallenge.dificultad);
             currentPlayer.score += points;
 
@@ -320,8 +320,8 @@ class CardGame {
     getPointsByDifficulty(difficulty) {
         const points = {
             'fácil': 10,
-            'media': 20,
-            'difícil': 30
+            'media': 15,
+            'dificil': 20
         };
         return points[difficulty] || 10;
     }

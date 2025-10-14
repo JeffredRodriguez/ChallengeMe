@@ -257,7 +257,7 @@ class RuletaGame {
         const currentPlayer = this.gameConfig.players[this.currentPlayerIndex];
 
         if (isCorrect) {
-            // Puntos basados en dificultad
+            // Puntos basados en dificultad - MODIFICADO
             const points = this.getPointsByDifficulty(this.currentQuestion.dificultad);
             currentPlayer.score += points;
 
@@ -283,8 +283,8 @@ class RuletaGame {
     getPointsByDifficulty(difficulty) {
         const points = {
             'fácil': 10,
-            'media': 20,
-            'difícil': 30
+            'media': 15,  // CAMBIADO de 20 a 15
+            'dificil': 20 // CAMBIADO de 30 a 20
         };
         return points[difficulty] || 10;
     }
