@@ -356,9 +356,35 @@ class RuletaGame {
     endGame() {
         // Ordenar jugadores por puntuación (de mayor a menor)
         const sortedPlayers = [...this.gameConfig.players].sort((a, b) => b.score - a.score);
-
+        
+        // Identificar empates
+        this.identifyTies(sortedPlayers);
+        
         // Mostrar modal de ganadores
         this.showWinnersModal(sortedPlayers);
+    }
+
+    identifyTies(sortedPlayers) {
+        // Agrupar jugadores por puntuación
+        const scoreGroups = {};
+        sortedPlayers.forEach(player => {
+            if (!scoreGroups[player.score]) {
+                scoreGroups[player.score] = [];
+            }
+            scoreGroups[player.score].push(player);
+        });
+
+        // Marcar jugadores que están empatados
+        Object.values(scoreGroups).forEach(group => {
+            if (group.length > 1) {
+                group.forEach(player => {
+                    player.isTied = true;
+                    player.tieCount = group.length;
+                });
+            }
+        });
+
+        console.log('🔍 Grupos de puntuación:', scoreGroups);
     }
 
     showWinnersModal(sortedPlayers) {
@@ -368,25 +394,29 @@ class RuletaGame {
         // Limpiar lista anterior
         winnersList.innerHTML = '';
 
-        // Actualizar podio
-        if (sortedPlayers.length > 0) {
-            document.getElementById('first-place-name').textContent = sortedPlayers[0].name;
-        }
-        if (sortedPlayers.length > 1) {
-            document.getElementById('second-place-name').textContent = sortedPlayers[1].name;
-        }
-        if (sortedPlayers.length > 2) {
-            document.getElementById('third-place-name').textContent = sortedPlayers[2].name;
-        }
+        // Obtener los primeros 3 puestos únicos (considerando empates)
+        const uniquePositions = this.getUniquePositions(sortedPlayers);
 
-        // Crear tarjetas para todos los jugadores
+        // Actualizar podio con manejo de empates
+        this.updatePodiumWithTies(uniquePositions);
+
+        // Crear tarjetas para todos los jugadores con indicadores de empate
         sortedPlayers.forEach((player, index) => {
             const winnerCard = document.createElement('div');
-            winnerCard.className = `winner-card ${index === 0 ? 'first-place' : ''}`;
+            winnerCard.className = `winner-card ${this.getWinnerCardClass(player, index)}`;
+            
+            // Agregar clase especial para empates
+            if (player.isTied) {
+                winnerCard.classList.add('tied');
+            }
+            
             winnerCard.innerHTML = `
-                <div class="winner-position">${index + 1}°</div>
+                <div class="winner-position">
+                    ${this.getPositionDisplay(player, index, sortedPlayers)}
+                </div>
                 <div class="winner-name">${player.name}</div>
                 <div class="winner-score">${player.score} pts</div>
+                ${player.isTied ? '<div class="tie-indicator">🏆 EMPATE</div>' : ''}
             `;
             winnersList.appendChild(winnerCard);
         });
@@ -396,6 +426,88 @@ class RuletaGame {
             modal.classList.add('active');
             this.createConfetti();
         }, 500);
+    }
+
+    getUniquePositions(sortedPlayers) {
+        const positions = [];
+        let currentPosition = 1;
+        
+        for (let i = 0; i < sortedPlayers.length; i++) {
+            // Si es el primer jugador o tiene diferente puntuación al anterior
+            if (i === 0 || sortedPlayers[i].score !== sortedPlayers[i-1].score) {
+                positions.push({
+                    position: currentPosition,
+                    players: [sortedPlayers[i]],
+                    score: sortedPlayers[i].score
+                });
+                currentPosition++;
+            } else {
+                // Misma puntuación que el anterior (empate)
+                positions[positions.length - 1].players.push(sortedPlayers[i]);
+            }
+        }
+        
+        return positions.slice(0, 3); // Solo primeros 3 puestos
+    }
+
+    updatePodiumWithTies(uniquePositions) {
+        // Limpiar podio
+        document.getElementById('first-place-name').textContent = '-';
+        document.getElementById('second-place-name').textContent = '-';
+        document.getElementById('third-place-name').textContent = '-';
+
+        // Limpiar clases de empate anteriores
+        document.querySelectorAll('.podium-step').forEach(step => {
+            step.classList.remove('tied-position');
+        });
+
+        // Actualizar podio considerando empates
+        uniquePositions.forEach((positionGroup, index) => {
+            const positionNames = positionGroup.players.map(p => p.name).join(' & ');
+            
+            switch(index) {
+                case 0: // Primer puesto
+                    document.getElementById('first-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.first').classList.add('tied-position');
+                    }
+                    break;
+                case 1: // Segundo puesto
+                    document.getElementById('second-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.second').classList.add('tied-position');
+                    }
+                    break;
+                case 2: // Tercer puesto
+                    document.getElementById('third-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.third').classList.add('tied-position');
+                    }
+                    break;
+            }
+        });
+    }
+
+    getPositionDisplay(player, index, sortedPlayers) {
+        // Si es el primer jugador
+        if (index === 0) {
+            return '1°';
+        }
+        
+        // Si tiene la misma puntuación que el anterior, mostrar mismo puesto
+        if (player.score === sortedPlayers[index - 1].score) {
+            return this.getPositionDisplay(sortedPlayers[index - 1], index - 1, sortedPlayers);
+        }
+        
+        // Si tiene diferente puntuación, mostrar siguiente puesto
+        return `${index + 1}°`;
+    }
+
+    getWinnerCardClass(player, index) {
+        if (index === 0) return 'first-place';
+        if (index === 1) return 'second-place';
+        if (index === 2) return 'third-place';
+        return '';
     }
 
     createConfetti() {

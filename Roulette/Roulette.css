@@ -684,17 +684,115 @@ input#answer-input {
   transform: translateY(-1px);
 }
 
-/* Ajustes para pantallas más pequeñas */
+/* ==========================================================================
+   ESTILOS PARA EMPATES
+   ========================================================================== */
+
+/* Indicador de empate en tarjetas */
+.tie-indicator {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-top: 5px;
+  background: rgba(255, 215, 0, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  text-align: center;
+  width: 100%;
+}
+
+/* Tarjetas con empate */
+.winner-card.tied {
+  border: 2px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  position: relative;
+}
+
+/* Posiciones empatadas en el podio */
+.podium-step.tied-position {
+  animation: pulse-tie 2s infinite;
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+.podium-step.tied-position.first {
+  background: linear-gradient(to top, rgba(255, 215, 0, 0.6), rgba(255, 215, 0, 0.2));
+}
+
+.podium-step.tied-position.second {
+  background: linear-gradient(to top, rgba(192, 192, 192, 0.6), rgba(192, 192, 192, 0.2));
+}
+
+.podium-step.tied-position.third {
+  background: linear-gradient(to top, rgba(205, 127, 50, 0.6), rgba(205, 127, 50, 0.2));
+}
+
+@keyframes pulse-tie {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+  }
+}
+
+/* Para mostrar múltiples nombres en el podio */
+.podium-player {
+  font-size: 0.9em;
+  line-height: 1.2;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+/* Mejora para tarjetas de jugadores empatados */
+.winner-card.tied .winner-position {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  border-color: #ffd700;
+  animation: glow-tie 1.5s infinite alternate;
+}
+
+@keyframes glow-tie {
+  from { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+  to { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+}
+
+/* Estilos específicos para empates en el podio */
+.podium-step .podium-player.tied {
+  font-size: 0.8em;
+  line-height: 1.1;
+}
+
+/* Ajustes para mostrar múltiples nombres en el podio */
+.podium-step .podium-player span.multiple-names {
+  display: block;
+  font-size: 0.8em;
+  line-height: 1.2;
+}
+
+/* Ajustes responsivos para empates */
 @media (max-width: 768px) {
+  .podium-player {
+    font-size: 0.8em;
+  }
+  
+  .tie-indicator {
+    font-size: 0.7rem;
+    padding: 1px 6px;
+  }
+  
   .game-container {
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 15px;
-  }
-  
-  .game-card {
-    width: 280px;
-    height: 380px;
   }
   
   .winners-content {
@@ -786,5 +884,53 @@ input#answer-input {
   
   .podium-step.third {
     height: 60px;
+  }
+  
+  .podium-player {
+    font-size: 0.75em;
+    min-height: 2.2em;
+  }
+  
+  .winner-card.tied {
+    padding: 10px 12px;
+  }
+  
+  .tie-indicator {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+  }
+}
+
+/* Ajustes adicionales para mejor visualización de empates */
+.winner-card .winner-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.winner-card.tied .winner-info {
+  align-items: flex-start;
+}
+
+.winner-card.tied .winner-name {
+  margin-left: 0;
+  margin-bottom: 5px;
+}
+
+/* Efecto especial para empates en primer lugar */
+.winner-card.first-place.tied {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+  animation: golden-glow 2s infinite alternate;
+}
+
+@keyframes golden-glow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
   }
 }
