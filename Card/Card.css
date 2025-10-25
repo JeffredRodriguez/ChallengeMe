@@ -332,7 +332,7 @@ body {
 }
 
 /* ==========================================================================
-   MODAL DE GANADORES - COMPLETAMENTE CORREGIDO
+   MODAL DE GANADORES - EXACTAMENTE COMO EN LA RULETA
    ========================================================================== */
 
 .winners-modal {
@@ -358,21 +358,21 @@ body {
 
 .winners-content {
   background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 500px;
-  width: 95%;
+  border-radius: 25px;
+  padding: 50px 30px;
+  max-width: 650px;
+  width: 100%;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
   transform: scale(0.9);
   transition: transform 0.5s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   position: relative;
   overflow: hidden;
-  max-height: 90vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 }
 
 .winners-modal.active .winners-content {
@@ -385,139 +385,110 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 8px;
   background: linear-gradient(90deg, #ff4d4d, #ffb347, #00ff99, #00c3ff);
   z-index: 1;
 }
 
-.trophy-icon {
-  font-size: 5rem;
-  margin-bottom: 5px;
-  display: block;
-  animation: bounce 2s infinite alternate;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
-  100% { transform: translateY(0) scale(1); }
-}
-
-.confetti {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #f00;
-  opacity: 0.8;
-  border-radius: 50%;
-  animation: fall 5s linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
 .winners-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
   background: linear-gradient(90deg, #ff4d4d, #ffb347, #00ff99, #00c3ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  letter-spacing: 1px;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1.5px;
 }
 
-/* PODIO MEJORADO */
+/* PODIO FUNCIONAL */
 .podium {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin: 10px 0;
-  height: 140px;
+  margin: 5px 0;
+  height: 200px;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 20px;
 }
 
 .podium-step {
-  width: 100px;
+  width: 140px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px 12px 0 0;
+  border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
-.podium-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
 .podium-step.first {
-  height: 120px;
-  background: linear-gradient(to top, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0.1));
-  border-color: rgba(255, 215, 0, 0.6);
+  height: 200px;
+  background: linear-gradient(to top, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.15));
+  border-color: rgba(255, 215, 0, 0.7);
   order: 2;
 }
 
 .podium-step.second {
-  height: 100px;
-  background: linear-gradient(to top, rgba(192, 192, 192, 0.4), rgba(192, 192, 192, 0.1));
-  border-color: rgba(192, 192, 192, 0.6);
+  height: 185px;
+  background: linear-gradient(to top, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.15));
+  border-color: rgba(192, 192, 192, 0.7);
   order: 1;
 }
 
 .podium-step.third {
-  height: 80px;
-  background: linear-gradient(to top, rgba(205, 127, 50, 0.4), rgba(205, 127, 50, 0.1));
-  border-color: rgba(205, 127, 50, 0.6);
+  height: 170px;
+  background: linear-gradient(to top, rgba(205, 127, 50, 0.5), rgba(205, 127, 50, 0.15));
+  border-color: rgba(205, 127, 50, 0.7);
   order: 3;
 }
 
 .podium-player {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-weight: bold;
-  font-size: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  padding: 0 5px;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 0 8px;
   text-align: center;
+  min-height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .podium-step.first .podium-player {
   color: #ffd700;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
 }
 
 .podium-step.second .podium-player {
   color: #c0c0c0;
+  font-size: 1.3rem;
 }
 
 .podium-step.third .podium-player {
   color: #cd7f32;
+  font-size: 1.2rem;
 }
 
 .winner-position {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  margin-bottom: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  margin-bottom: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
 }
 
 .first-place .winner-position {
@@ -538,46 +509,179 @@ body {
   border-color: #cd7f32;
 }
 
-/* LISTA DE GANADORES CON SCROLL */
+/* LISTA DE CLASIFICACIÓN */
 .winners-list-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  min-height: 250px;
 }
 
 .winners-list-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
   color: #fff;
   text-align: center;
 }
 
 .winners-list {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   margin: 0;
-  padding-right: 8px;
+  padding-right: 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
-/* Personalizar la barra de scroll */
+/* TARJETAS DE JUGADORES */
+.winner-card {
+    margin-top: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.winner-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.winner-card.first-place {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.08));
+  border: 3px solid rgba(255, 215, 0, 0.5);
+  order: -1;
+}
+
+.winner-card.second-place {
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.3), rgba(192, 192, 192, 0.08));
+  border: 3px solid rgba(192, 192, 192, 0.5);
+}
+
+.winner-card.third-place {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.08));
+  border: 3px solid rgba(205, 127, 50, 0.5);
+}
+
+.winner-name {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.winner-score {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #00ff99;
+  flex-shrink: 0;
+  text-shadow: 0 0 12px rgba(0, 255, 153, 0.4);
+}
+
+/* EMPATES */
+.tie-indicator {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-top: 10px;
+  background: rgba(255, 215, 0, 0.25);
+  padding: 5px 5px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  text-align: center;
+  margin-left: 40px;
+  width: 30%;
+  height: 30px;
+  
+}
+
+.winner-card.tied {
+  border: 3px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.08));
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+  position: relative;
+}
+
+.podium-step.tied-position {
+  animation: pulse-tie 2s infinite;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes pulse-tie {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px rgba(255, 215, 0, 0.7);
+  }
+}
+
+/* BOTÓN CONTINUAR */
+.winners-button-container {
+  margin-top: 15px;
+  padding-top: 20px;
+  flex-shrink: 0;
+  position: relative;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.continue-btn {
+  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+  color: white;
+  border: 3px solid #ff4d4d;
+  padding: 5px 12px;
+  border-radius: 60px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 280px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 30px rgba(255, 77, 77, 0.4);
+}
+
+.continue-btn:hover {
+  background: transparent;
+  color: #ff4d4d;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(255, 77, 77, 0.5);
+  border-color: #ff4d4d;
+}
+
+.continue-btn:active {
+  transform: translateY(-2px);
+}
+
+/* Scrollbar */
 .winners-list::-webkit-scrollbar {
-  width: 8px;
+  width: 20px;
+  height: 25px;
 }
 
 .winners-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
 }
 
 .winners-list::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #ff4d4d, #00ff99);
-  border-radius: 10px;
+  border-radius: 12px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
@@ -586,211 +690,130 @@ body {
   background: linear-gradient(180deg, #ff6b6b, #00e676);
 }
 
-/* TARJETAS DE JUGADORES */
-.winner-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.winner-card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.winner-card.first-place {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.05));
-  border: 2px solid rgba(255, 215, 0, 0.4);
-  order: -1;
-}
-
-.winner-card.second-place {
-  background: linear-gradient(135deg, rgba(192, 192, 192, 0.25), rgba(192, 192, 192, 0.05));
-  border: 2px solid rgba(192, 192, 192, 0.4);
-}
-
-.winner-card.third-place {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.25), rgba(205, 127, 50, 0.05));
-  border: 2px solid rgba(205, 127, 50, 0.4);
-}
-
-.winner-position-small {
-  font-size: 1.1rem;
-  font-weight: bold;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #f00;
+  opacity: 0.8;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fall 5s linear forwards;
 }
 
-.winner-name {
-  flex-grow: 1;
-  text-align: left;
-  margin-left: 15px;
-  font-size: 1.1rem;
-  font-weight: 500;
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-.winner-score {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #00ff99;
-  flex-shrink: 0;
-  text-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
-}
-
-/* BOTÓN CONTINUAR */
-.winners-button-container {
-  margin-top: 10px;
-  padding-top: 15px;
-  flex-shrink: 0;
-  position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.continue-btn {
-  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
-  color: white;
-  border: 2px solid #ff4d4d;
-  padding: 14px 35px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 250px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  box-shadow: 0 5px 20px rgba(255, 77, 77, 0.3);
-}
-
-.continue-btn:hover {
-  background: transparent;
-  color: #ff4d4d;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
-  border-color: #ff4d4d;
-}
-
-.continue-btn:active {
-  transform: translateY(-1px);
-}
-
-/* Ajustes para pantallas más pequeñas */
+/* Responsive */
 @media (max-width: 768px) {
   .game-container {
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 15px;
   }
-  
-  .game-card {
-    width: 280px;
-    height: 380px;
-  }
-  
+
   .winners-content {
     max-width: 95%;
-    padding: 25px 20px;
+    padding: 30px 25px;
     max-height: 85vh;
   }
-  
+
   .winners-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
-  
+
   .podium {
-    height: 120px;
-    gap: 8px;
+    height: 160px;
+    gap: 15px;
   }
-  
+
   .podium-step {
-    width: 85px;
+    width: 110px;
   }
-  
+
   .podium-step.first {
+    height: 140px;
+  }
+
+  .podium-step.second {
+    height: 120px;
+  }
+
+  .podium-step.third {
     height: 100px;
   }
-  
-  .podium-step.second {
-    height: 85px;
-  }
-  
-  .podium-step.third {
-    height: 70px;
-  }
-  
+
   .podium-player {
-    font-size: 0.9rem;
-  }
-  
-  .winner-card {
-    padding: 12px 15px;
-  }
-  
-  .winner-name {
-    font-size: 1rem;
-    margin-left: 12px;
-  }
-  
-  .winner-score {
     font-size: 1.1rem;
   }
-  
-  .winners-list {
-    max-height: 200px;
+
+  .winner-card {
+    padding: 18px 20px;
   }
-  
+
+  .winner-name {
+    font-size: 1.2rem;
+    margin-left: 18px;
+  }
+
+  .winner-score {
+    font-size: 1.3rem;
+  }
+
+  .winners-list {
+    max-height: 250px;
+  }
+
   .continue-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
+    padding: 14px 30px;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .winners-content {
-    padding: 20px 15px;
+    padding: 25px 20px;
   }
-  
+
   .winners-title {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
-  
-  .trophy-icon {
-    font-size: 4rem;
-  }
-  
+
   .podium {
+    height: 140px;
+  }
+
+  .podium-step {
+    width: 90px;
+  }
+
+  .podium-step.first {
+    height: 120px;
+  }
+
+  .podium-step.second {
     height: 100px;
   }
-  
-  .podium-step {
-    width: 70px;
-  }
-  
-  .podium-step.first {
+
+  .podium-step.third {
     height: 85px;
   }
-  
-  .podium-step.second {
-    height: 70px;
+
+  .podium-player {
+    font-size: 0.9em;
+    min-height: 2.5em;
   }
-  
-  .podium-step.third {
-    height: 60px;
+
+  .winner-card.tied {
+    padding: 15px 18px;
+  }
+
+  .tie-indicator {
+    font-size: 0.75rem;
+    padding: 3px 8px;
   }
 }

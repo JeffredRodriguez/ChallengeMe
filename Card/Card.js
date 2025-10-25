@@ -402,8 +402,30 @@ class CardGame {
         // Ordenar jugadores por puntuación (de mayor a menor)
         const sortedPlayers = [...this.gameConfig.players].sort((a, b) => b.score - a.score);
 
+        // Identificar empates
+        this.identifyTies(sortedPlayers);
+
         // Mostrar modal de ganadores
         this.showWinnersModal(sortedPlayers);
+    }
+
+    identifyTies(sortedPlayers) {
+        const scoreGroups = {};
+        sortedPlayers.forEach(player => {
+            if (!scoreGroups[player.score]) {
+                scoreGroups[player.score] = [];
+            }
+            scoreGroups[player.score].push(player);
+        });
+
+        Object.values(scoreGroups).forEach(group => {
+            if (group.length > 1) {
+                group.forEach(player => {
+                    player.isTied = true;
+                    player.tieCount = group.length;
+                });
+            }
+        });
     }
 
     showWinnersModal(sortedPlayers) {
@@ -413,25 +435,26 @@ class CardGame {
         // Limpiar lista anterior
         winnersList.innerHTML = '';
 
-        // Actualizar podio
-        if (sortedPlayers.length > 0) {
-            document.getElementById('first-place-name').textContent = sortedPlayers[0].name;
-        }
-        if (sortedPlayers.length > 1) {
-            document.getElementById('second-place-name').textContent = sortedPlayers[1].name;
-        }
-        if (sortedPlayers.length > 2) {
-            document.getElementById('third-place-name').textContent = sortedPlayers[2].name;
-        }
+        // Actualizar podio con empates
+        const uniquePositions = this.getUniquePositions(sortedPlayers);
+        this.updatePodiumWithTies(uniquePositions);
 
         // Crear tarjetas para todos los jugadores
         sortedPlayers.forEach((player, index) => {
             const winnerCard = document.createElement('div');
-            winnerCard.className = `winner-card ${index === 0 ? 'first-place' : ''}`;
+            winnerCard.className = `winner-card ${this.getWinnerCardClass(player, index)}`;
+            
+            if (player.isTied) {
+                winnerCard.classList.add('tied');
+            }
+            
             winnerCard.innerHTML = `
-                <div class="winner-position">${index + 1}°</div>
+                <div class="winner-position">
+                    ${this.getPositionDisplay(player, index, sortedPlayers)}
+                </div>
                 <div class="winner-name">${player.name}</div>
                 <div class="winner-score">${player.score} pts</div>
+                ${player.isTied ? '<div class="tie-indicator">🏆 EMPATE</div>' : ''}
             `;
             winnersList.appendChild(winnerCard);
         });
@@ -441,6 +464,76 @@ class CardGame {
             modal.classList.add('active');
             this.createConfetti();
         }, 500);
+    }
+
+    getUniquePositions(sortedPlayers) {
+        const positions = [];
+        let currentPosition = 1;
+        
+        for (let i = 0; i < sortedPlayers.length; i++) {
+            if (i === 0 || sortedPlayers[i].score !== sortedPlayers[i-1].score) {
+                positions.push({
+                    position: currentPosition,
+                    players: [sortedPlayers[i]],
+                    score: sortedPlayers[i].score
+                });
+                currentPosition++;
+            } else {
+                positions[positions.length - 1].players.push(sortedPlayers[i]);
+            }
+        }
+        
+        return positions.slice(0, 3);
+    }
+
+    updatePodiumWithTies(uniquePositions) {
+        document.getElementById('first-place-name').textContent = '-';
+        document.getElementById('second-place-name').textContent = '-';
+        document.getElementById('third-place-name').textContent = '-';
+
+        document.querySelectorAll('.podium-step').forEach(step => {
+            step.classList.remove('tied-position');
+        });
+
+        uniquePositions.forEach((positionGroup, index) => {
+            const positionNames = positionGroup.players.map(p => p.name).join(' & ');
+            
+            switch(index) {
+                case 0:
+                    document.getElementById('first-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.first').classList.add('tied-position');
+                    }
+                    break;
+                case 1:
+                    document.getElementById('second-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.second').classList.add('tied-position');
+                    }
+                    break;
+                case 2:
+                    document.getElementById('third-place-name').textContent = positionNames;
+                    if (positionGroup.players.length > 1) {
+                        document.querySelector('.podium-step.third').classList.add('tied-position');
+                    }
+                    break;
+            }
+        });
+    }
+
+    getPositionDisplay(player, index, sortedPlayers) {
+        if (index === 0) return '1°';
+        if (player.score === sortedPlayers[index - 1].score) {
+            return this.getPositionDisplay(sortedPlayers[index - 1], index - 1, sortedPlayers);
+        }
+        return `${index + 1}°`;
+    }
+
+    getWinnerCardClass(player, index) {
+        if (index === 0) return 'first-place';
+        if (index === 1) return 'second-place';
+        if (index === 2) return 'third-place';
+        return '';
     }
 
     createConfetti() {
@@ -459,18 +552,6 @@ class CardGame {
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = '-10px';
             confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-            
-            // Agregar animación de caída
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
             
             modal.appendChild(confetti);
             
