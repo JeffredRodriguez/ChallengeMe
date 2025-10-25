@@ -10,25 +10,18 @@ class RuletaGame {
         this.currentPlayerIndex = 0;
         this.isSpinning = false;
         this.gameActive = true;
-        this.usedQuestions = new Set(); // Para evitar preguntas repetidas
-        this.turnsPerPlayer = 8; // 8 turnos por jugador
-        this.playerTurns = [];   // Array para contar turnos de cada jugador
+        this.usedQuestions = new Set();
+        this.turnsPerPlayer = 8;
+        this.playerTurns = [];
 
         this.initializeGame();
     }
 
     async initializeGame() {
         try {
-            // Cargar configuración del juego
             this.loadGameConfig();
-
-            // Inicializar interfaz
             this.initializeUI();
-
-            // Cargar preguntas desde Supabase usando el Singleton
             await this.loadQuestionsFromSupabase();
-
-            // Iniciar juego
             this.startGame();
         } catch (error) {
             console.error('Error inicializando el juego:', error);
@@ -46,35 +39,24 @@ class RuletaGame {
 
         this.gameConfig = JSON.parse(savedConfig);
         console.log('Configuración del juego cargada:', this.gameConfig);
-
-        // Inicializar el contador de turnos por jugador
         this.playerTurns = Array(this.gameConfig.players.length).fill(0);
     }
 
     initializeUI() {
-        // Actualizar información de la categoría
         document.getElementById('category-name').textContent = this.gameConfig.categoryName;
         document.getElementById('category-description').textContent = `Preguntas sobre ${this.gameConfig.categoryName}`;
-
-        // Renderizar jugadores
         this.renderPlayers();
-
-        // Agregar event listeners
         this.addEventListeners();
     }
 
     async loadQuestionsFromSupabase() {
         try {
-            // USAR EL SINGLETON para obtener el cliente Supabase
             const client = window.supabaseClient.getClient();
-
             if (!client) {
                 throw new Error('Cliente Supabase no disponible');
             }
 
             console.log('Cargando preguntas para la categoría:', this.gameConfig.category);
-
-            // Obtener TODAS las preguntas de la categoría seleccionada
             const { data, error } = await client
                 .from('preguntas')
                 .select('*')
@@ -85,34 +67,22 @@ class RuletaGame {
             }
 
             if (data && data.length > 0) {
-                console.log(`Se encontraron ${data.length} preguntas en la base de datos`);
-
-                // Mezclar preguntas aleatoriamente
+                console.log(`Se encontraron ${data.length} preguntas`);
                 this.allQuestions = this.shuffleArray(data);
-
-                // Seleccionar máximo 25 preguntas (o menos si no hay suficientes)
                 this.questions = this.allQuestions.slice(0, Math.min(25, this.allQuestions.length));
-
-                console.log(`Se usarán ${this.questions.length} preguntas para el juego`);
-
-                if (this.questions.length < 10) {
-                    console.warn('Pocas preguntas disponibles. Considera agregar más a la base de datos.');
-                }
+                console.log(`Se usarán ${this.questions.length} preguntas`);
             } else {
-                throw new Error('No se encontraron preguntas para esta categoría en la base de datos');
+                throw new Error('No se encontraron preguntas para esta categoría');
             }
-
         } catch (error) {
-            console.error('Error cargando preguntas desde Supabase:', error);
+            console.error('Error cargando preguntas:', error);
             this.useFallbackQuestions();
         }
     }
 
     handleInitializationError(error) {
-        const errorMessage = `Error al inicializar el juego: ${error.message}. Se usarán preguntas de respaldo.`;
-        console.error(errorMessage);
-        alert(errorMessage);
-
+        console.error('Error al inicializar el juego:', error);
+        alert(`Error al inicializar el juego: ${error.message}. Se usarán preguntas de respaldo.`);
         this.useFallbackQuestions();
         this.startGame();
     }
@@ -142,32 +112,19 @@ class RuletaGame {
             container.appendChild(playerCard);
         });
 
-        // Actualizar jugador actual
-        document.getElementById('current-player').textContent =
-            this.gameConfig.players[this.currentPlayerIndex].name;
+        document.getElementById('current-player').textContent = this.gameConfig.players[this.currentPlayerIndex].name;
     }
 
     addEventListeners() {
-        // Botón de girar ruleta
         document.getElementById('spin-btn').addEventListener('click', () => this.spinRoulette());
-
-        // Botón de ver respuesta
         document.getElementById('show-answer').addEventListener('click', () => this.showAnswer());
-
-        // Botones de resultado
         document.getElementById('btn-correct').addEventListener('click', () => this.handleAnswer(true));
         document.getElementById('btn-incorrect').addEventListener('click', () => this.handleAnswer(false));
-
-        // Botones de pausa
         document.getElementById('btn-pausa').addEventListener('click', () => this.pauseGame());
         document.getElementById('resume-game').addEventListener('click', () => this.resumeGame());
         document.getElementById('exit-game').addEventListener('click', () => this.showExitConfirmation());
-
-        // Botones de confirmación de salida
         document.getElementById('confirm-exit').addEventListener('click', () => this.exitGame());
         document.getElementById('cancel-exit').addEventListener('click', () => this.hideExitConfirmation());
-
-        // Botón de continuar en el modal de ganadores
         document.getElementById('continue-btn').addEventListener('click', () => {
             window.location.href = '/LobbyRoulette/Lobby.html';
         });
@@ -175,13 +132,11 @@ class RuletaGame {
 
     startGame() {
         console.log('Juego iniciado con', this.questions.length, 'preguntas');
-
         if (this.questions.length === 0) {
-            alert('No hay preguntas disponibles para esta categoría. Redirigiendo al lobby...');
+            alert('No hay preguntas disponibles. Redirigiendo al lobby...');
             window.location.href = 'lobby.html';
             return;
         }
-
         this.updateUI();
     }
 
@@ -192,15 +147,13 @@ class RuletaGame {
         const spinBtn = document.getElementById('spin-btn');
         spinBtn.disabled = true;
 
-        // Animación de la ruleta
         const roulette = document.querySelector('.roulette-wheel');
-        const spins = 5 + Math.random() * 5; // 5-10 vueltas
+        const spins = 5 + Math.random() * 5;
         const degrees = 360 * spins;
 
         roulette.style.transition = 'transform 3s cubic-bezier(0.2, 0.8, 0.3, 1)';
         roulette.style.transform = `rotate(${degrees}deg)`;
 
-        // Después de la animación, mostrar pregunta
         setTimeout(() => {
             this.showRandomQuestion();
             this.isSpinning = false;
@@ -214,11 +167,8 @@ class RuletaGame {
             return;
         }
 
-        // Seleccionar pregunta aleatoria que no se haya usado
         let availableQuestions = this.questions.filter((_, index) => !this.usedQuestions.has(index));
-
         if (availableQuestions.length === 0) {
-            // Si todas las preguntas se usaron, reiniciar
             this.usedQuestions.clear();
             availableQuestions = this.questions;
         }
@@ -226,25 +176,19 @@ class RuletaGame {
         const randomIndex = Math.floor(Math.random() * availableQuestions.length);
         const questionIndex = this.questions.indexOf(availableQuestions[randomIndex]);
         this.usedQuestions.add(questionIndex);
+        this.currentQuestion = this.questions[questionIndex];
 
-        const question = this.questions[questionIndex];
-        this.currentQuestion = question;
-
-        this.displayQuestion(question);
+        this.displayQuestion(this.currentQuestion);
     }
 
     displayQuestion(question) {
-        // Mostrar área de pregunta
         const questionArea = document.getElementById('question-area');
         questionArea.classList.remove('hidden');
 
-        // Actualizar pregunta en UI
         document.getElementById('question-text').textContent = question.pregunta;
         document.getElementById('question-difficulty').textContent = question.dificultad;
         document.getElementById('question-difficulty').className = `difficulty ${question.dificultad}`;
         document.getElementById('question-category').textContent = this.gameConfig.categoryName;
-
-        // Limpiar resultados anteriores
         document.getElementById('correct-answer').textContent = question.respuesta_correcta;
         document.getElementById('answer-result').classList.add('hidden');
     }
@@ -257,24 +201,16 @@ class RuletaGame {
         const currentPlayer = this.gameConfig.players[this.currentPlayerIndex];
 
         if (isCorrect) {
-            // Puntos basados en dificultad - MODIFICADO
             const points = this.getPointsByDifficulty(this.currentQuestion.dificultad);
             currentPlayer.score += points;
-
-            // Marcar jugador como correcto
             document.querySelectorAll('.player-card')[this.currentPlayerIndex].classList.add('correct');
-
             console.log(`✅ ${currentPlayer.name} respondió correctamente: +${points} puntos`);
         } else {
-            // Marcar jugador como incorrecto
             document.querySelectorAll('.player-card')[this.currentPlayerIndex].classList.add('incorrect');
             console.log(`❌ ${currentPlayer.name} respondió incorrectamente`);
         }
 
-        // Ocultar área de pregunta
         document.getElementById('question-area').classList.add('hidden');
-
-        // Pasar al siguiente jugador después de un delay
         setTimeout(() => {
             this.nextPlayer();
         }, 1500);
@@ -283,27 +219,21 @@ class RuletaGame {
     getPointsByDifficulty(difficulty) {
         const points = {
             'fácil': 10,
-            'media': 15,  // CAMBIADO de 20 a 15
-            'dificil': 20 // CAMBIADO de 30 a 20
+            'media': 15,
+            'dificil': 20
         };
         return points[difficulty] || 10;
     }
 
     nextPlayer() {
-        // Remover clases de resultado
         document.querySelectorAll('.player-card').forEach(card => {
             card.classList.remove('correct', 'incorrect');
         });
 
-        // Remover clase active del jugador actual
         document.querySelectorAll('.player-card')[this.currentPlayerIndex].classList.remove('active');
-
-        // Sumar turno al jugador actual
         this.playerTurns[this.currentPlayerIndex] += 1;
 
-        // Verificar si todos los jugadores han jugado 8 turnos
         const allDone = this.playerTurns.every(turns => turns >= this.turnsPerPlayer);
-
         if (allDone) {
             setTimeout(() => {
                 this.endGame();
@@ -311,19 +241,14 @@ class RuletaGame {
             return;
         }
 
-        // Pasar al siguiente jugador que no haya terminado sus turnos
         let nextIndex = this.currentPlayerIndex;
         do {
             nextIndex = (nextIndex + 1) % this.gameConfig.players.length;
         } while (this.playerTurns[nextIndex] >= this.turnsPerPlayer);
 
         this.currentPlayerIndex = nextIndex;
-
-        // Agregar clase active al nuevo jugador
         document.querySelectorAll('.player-card')[this.currentPlayerIndex].classList.add('active');
-        document.getElementById('current-player').textContent =
-            this.gameConfig.players[this.currentPlayerIndex].name;
-
+        document.getElementById('current-player').textContent = this.gameConfig.players[this.currentPlayerIndex].name;
         this.updateUI();
     }
 
@@ -354,18 +279,12 @@ class RuletaGame {
     }
 
     endGame() {
-        // Ordenar jugadores por puntuación (de mayor a menor)
         const sortedPlayers = [...this.gameConfig.players].sort((a, b) => b.score - a.score);
-        
-        // Identificar empates
         this.identifyTies(sortedPlayers);
-        
-        // Mostrar modal de ganadores
         this.showWinnersModal(sortedPlayers);
     }
 
     identifyTies(sortedPlayers) {
-        // Agrupar jugadores por puntuación
         const scoreGroups = {};
         sortedPlayers.forEach(player => {
             if (!scoreGroups[player.score]) {
@@ -374,7 +293,6 @@ class RuletaGame {
             scoreGroups[player.score].push(player);
         });
 
-        // Marcar jugadores que están empatados
         Object.values(scoreGroups).forEach(group => {
             if (group.length > 1) {
                 group.forEach(player => {
@@ -383,29 +301,20 @@ class RuletaGame {
                 });
             }
         });
-
-        console.log('🔍 Grupos de puntuación:', scoreGroups);
     }
 
     showWinnersModal(sortedPlayers) {
         const modal = document.getElementById('winners-modal');
         const winnersList = document.getElementById('winners-list');
         
-        // Limpiar lista anterior
         winnersList.innerHTML = '';
-
-        // Obtener los primeros 3 puestos únicos (considerando empates)
         const uniquePositions = this.getUniquePositions(sortedPlayers);
-
-        // Actualizar podio con manejo de empates
         this.updatePodiumWithTies(uniquePositions);
 
-        // Crear tarjetas para todos los jugadores con indicadores de empate
         sortedPlayers.forEach((player, index) => {
             const winnerCard = document.createElement('div');
             winnerCard.className = `winner-card ${this.getWinnerCardClass(player, index)}`;
             
-            // Agregar clase especial para empates
             if (player.isTied) {
                 winnerCard.classList.add('tied');
             }
@@ -421,7 +330,6 @@ class RuletaGame {
             winnersList.appendChild(winnerCard);
         });
 
-        // Mostrar modal con animación
         setTimeout(() => {
             modal.classList.add('active');
             this.createConfetti();
@@ -433,7 +341,6 @@ class RuletaGame {
         let currentPosition = 1;
         
         for (let i = 0; i < sortedPlayers.length; i++) {
-            // Si es el primer jugador o tiene diferente puntuación al anterior
             if (i === 0 || sortedPlayers[i].score !== sortedPlayers[i-1].score) {
                 positions.push({
                     position: currentPosition,
@@ -442,43 +349,39 @@ class RuletaGame {
                 });
                 currentPosition++;
             } else {
-                // Misma puntuación que el anterior (empate)
                 positions[positions.length - 1].players.push(sortedPlayers[i]);
             }
         }
         
-        return positions.slice(0, 3); // Solo primeros 3 puestos
+        return positions.slice(0, 3);
     }
 
     updatePodiumWithTies(uniquePositions) {
-        // Limpiar podio
         document.getElementById('first-place-name').textContent = '-';
         document.getElementById('second-place-name').textContent = '-';
         document.getElementById('third-place-name').textContent = '-';
 
-        // Limpiar clases de empate anteriores
         document.querySelectorAll('.podium-step').forEach(step => {
             step.classList.remove('tied-position');
         });
 
-        // Actualizar podio considerando empates
         uniquePositions.forEach((positionGroup, index) => {
             const positionNames = positionGroup.players.map(p => p.name).join(' & ');
             
             switch(index) {
-                case 0: // Primer puesto
+                case 0:
                     document.getElementById('first-place-name').textContent = positionNames;
                     if (positionGroup.players.length > 1) {
                         document.querySelector('.podium-step.first').classList.add('tied-position');
                     }
                     break;
-                case 1: // Segundo puesto
+                case 1:
                     document.getElementById('second-place-name').textContent = positionNames;
                     if (positionGroup.players.length > 1) {
                         document.querySelector('.podium-step.second').classList.add('tied-position');
                     }
                     break;
-                case 2: // Tercer puesto
+                case 2:
                     document.getElementById('third-place-name').textContent = positionNames;
                     if (positionGroup.players.length > 1) {
                         document.querySelector('.podium-step.third').classList.add('tied-position');
@@ -489,17 +392,10 @@ class RuletaGame {
     }
 
     getPositionDisplay(player, index, sortedPlayers) {
-        // Si es el primer jugador
-        if (index === 0) {
-            return '1°';
-        }
-        
-        // Si tiene la misma puntuación que el anterior, mostrar mismo puesto
+        if (index === 0) return '1°';
         if (player.score === sortedPlayers[index - 1].score) {
             return this.getPositionDisplay(sortedPlayers[index - 1], index - 1, sortedPlayers);
         }
-        
-        // Si tiene diferente puntuación, mostrar siguiente puesto
         return `${index + 1}°`;
     }
 
@@ -513,35 +409,19 @@ class RuletaGame {
     createConfetti() {
         const modal = document.getElementById('winners-modal');
         
-        // Crear confeti
         for (let i = 0; i < 50; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             
-            // Colores aleatorios
             const colors = ['#ff4d4d', '#ffb347', '#00ff99', '#00c3ff', '#a78bfa', '#fbbf24'];
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             
-            // Posición y animación aleatoria
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = '-10px';
             confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
             
-            // Agregar animación de caída
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
             modal.appendChild(confetti);
             
-            // Eliminar confeti después de la animación
             setTimeout(() => {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
@@ -552,7 +432,6 @@ class RuletaGame {
 
     useFallbackQuestions() {
         console.log('Usando preguntas de respaldo...');
-        // Preguntas de ejemplo para cuando no hay conexión a Supabase
         this.questions = [
             {
                 pregunta: "¿Cuál es la capital de Francia?",
@@ -571,18 +450,6 @@ class RuletaGame {
                 respuesta_correcta: "Gabriel García Márquez",
                 dificultad: "media",
                 categoria_id: this.gameConfig.category
-            },
-            {
-                pregunta: "¿Cuál es el elemento químico con símbolo 'O'?",
-                respuesta_correcta: "Oxígeno",
-                dificultad: "fácil",
-                categoria_id: this.gameConfig.category
-            },
-            {
-                pregunta: "¿Cuál es el río más largo del mundo?",
-                respuesta_correcta: "Amazonas",
-                dificultad: "difícil",
-                categoria_id: this.gameConfig.category
             }
         ];
         
@@ -590,7 +457,7 @@ class RuletaGame {
     }
 }
 
-// 🔹 FUNCIÓN GLOBAL para verificar el estado de Supabase
+// Función global para verificar Supabase
 window.checkSupabaseConnection = function () {
     if (window.supabaseClient && window.supabaseClient.isReady()) {
         console.log('✅ Conexión Supabase activa');
@@ -601,13 +468,9 @@ window.checkSupabaseConnection = function () {
     }
 };
 
-// Inicializar juego cuando se cargue la página
+// Inicializar juego
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Inicializando juego de ruleta...');
-
-    // Verificar conexión Supabase
     window.checkSupabaseConnection();
-
-    // Iniciar juego
     new RuletaGame();
 });

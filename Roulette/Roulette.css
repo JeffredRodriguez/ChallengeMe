@@ -76,7 +76,10 @@ body {
   box-shadow: 0 0 12px #ff2d5555;
 }
 
-/* Centro - Ruleta */
+/* ==========================================================================
+NUEVO DISEÑO ESPECTACULAR DE RULETA
+========================================================================== */
+
 .main-game {
   display: flex;
   flex-direction: column;
@@ -91,60 +94,213 @@ body {
 }
 
 .roulette-wheel {
-  width: 340px;
-  height: 340px;
-  border: 14px solid #fff3;
+  width: 380px;
+  height: 380px;
+  border: 8px solid #ff4d4d;
   border-radius: 50%;
-  /* Nuevo diseño: colores más modernos y vibrantes */
-  background: conic-gradient(
-    #3b82f6 0deg 45deg,      /* Azul Tailwind */
-    #f59e42 45deg 90deg,     /* Naranja suave */
-    #10b981 90deg 135deg,    /* Verde esmeralda */
-    #f43f5e 135deg 180deg,   /* Rosa fuerte */
-    #a78bfa 180deg 225deg,   /* Violeta pastel */
-    #fbbf24 225deg 270deg,   /* Amarillo dorado */
-    #06b6d4 270deg 315deg,   /* Cyan */
-    #6366f1 315deg 360deg    /* Indigo */
-  );
+  background: 
+    radial-gradient(circle at 30% 30%, #ff6b6b 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, #0097b2 0%, transparent 50%),
+    conic-gradient(
+      from 0deg,
+      #ff4d4d 0deg 60deg,
+      #0097b2 60deg 120deg,
+      #ffffff 120deg 180deg,
+      #000000 180deg 240deg,
+      #ff4d4d 240deg 300deg,
+      #0097b2 300deg 360deg
+    );
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  box-shadow: 0 0 40px #0008, 0 0 0 8px #fff1;
+  box-shadow: 
+    0 0 60px rgba(255, 77, 77, 0.6),
+    0 0 0 12px rgba(255, 255, 255, 0.1),
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.2);
   overflow: visible;
-  transition: transform 2.5s cubic-bezier(.17,.67,.83,.67);
+  transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+  animation: wheel-glow 3s ease-in-out infinite alternate;
 }
 
+@keyframes wheel-glow {
+  0% {
+    box-shadow: 
+      0 0 40px rgba(255, 77, 77, 0.4),
+      0 0 0 10px rgba(255, 255, 255, 0.1),
+      inset 0 0 30px rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    box-shadow: 
+      0 0 80px rgba(255, 77, 77, 0.8),
+      0 0 0 14px rgba(255, 255, 255, 0.15),
+      inset 0 0 50px rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* Segmentos decorativos internos */
+.roulette-wheel::before {
+  content: '';
+  position: absolute;
+  width: 92%;
+  height: 92%;
+  border-radius: 50%;
+  background: 
+    repeating-conic-gradient(
+      from 0deg,
+      transparent 0deg 15deg,
+      rgba(255, 255, 255, 0.1) 15deg 30deg
+    );
+  z-index: 1;
+}
+
+.roulette-wheel::after {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  border: 3px dashed rgba(255, 255, 255, 0.3);
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 2;
+}
+
+/* Nuevo puntero más espectacular */
 .roulette-pointer {
   position: absolute;
-  top: -32px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0; height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 32px solid #ff4d4d;
-  z-index: 20;
-  filter: drop-shadow(0 0 8px #ff4d4d88);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 45px solid #ff4d4d;
+  z-index: 30;
+  filter: 
+    drop-shadow(0 0 15px #ff4d4d)
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  animation: pointer-pulse 2s ease-in-out infinite;
 }
 
+@keyframes pointer-pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    filter: 
+      drop-shadow(0 0 15px #ff4d4d)
+      drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+    filter: 
+      drop-shadow(0 0 25px #ff4d4d)
+      drop-shadow(0 6px 12px rgba(0, 0, 0, 0.8));
+  }
+}
+
+/* Centro de la ruleta rediseñado */
 .wheel-center {
-  background: #000b;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ff4d4d 0%,
+    #0097b2 50%,
+    #000000 100%
+  );
   color: #fff;
   border-radius: 50%;
-  padding: 22px 38px;
+  padding: 25px 40px;
   font-weight: bold;
-  font-size: 1.5rem;
-  z-index: 10;
-  box-shadow: 0 0 18px #fff4, 0 0 0 4px #fff2;
+  font-size: 1.6rem;
+  z-index: 20;
+  box-shadow: 
+    0 0 30px rgba(255, 77, 77, 0.6),
+    0 0 0 6px rgba(255, 255, 255, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
   position: absolute;
-  left: 50%; top: 50%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 0 2px 8px #000a;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 77, 77, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: center-rotate 20s linear infinite;
 }
 
+@keyframes center-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
-/* Todos los botones principales rojo #e53e3e, excepto los de respuesta ✔ y ✘ */
+/* Efectos de partículas alrededor */
+.roulette-wheel .particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff4d4d;
+  border-radius: 50%;
+  animation: particle-float 3s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { top: 10%; left: 50%; animation-delay: 0s; }
+.particle:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; }
+.particle:nth-child(3) { bottom: 30%; left: 30%; animation-delay: 1s; }
+.particle:nth-child(4) { bottom: 10%; right: 40%; animation-delay: 1.5s; }
+.particle:nth-child(5) { top: 40%; left: 10%; animation-delay: 2s; }
+
+@keyframes particle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Efecto de brillo giratorio */
+.roulette-wheel .shine {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 180deg,
+    rgba(255, 255, 255, 0.3) 180deg 360deg
+  );
+  animation: shine-rotate 4s linear infinite;
+  z-index: 3;
+}
+
+@keyframes shine-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Botón de girar mejorado */
 .spin-btn,
 .btn.pause,
 #show-answer,
@@ -164,48 +320,76 @@ body {
   transform: scale(0.97);
 }
 
-.btn:disabled,
 .spin-btn:disabled {
-  background: #feb2b2 !important;
-  color: #fff5f5 !important;
-  cursor: not-allowed;
+  background: linear-gradient(135deg, #666, #999) !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 
-/* Solo los botones de respuesta ✔ y ✘ mantienen sus colores */
-.btn.green {
-  background: linear-gradient(90deg, #00d680, #00d680);
-  color: #fff !important;
-  border: none;
-  box-shadow: none !important;
+/* Efecto de chispas al girar */
+@keyframes sparks {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-.btn.red {
-  background: linear-gradient(90deg, #ff4d4d, #ff4d4d);
-  color: #fff !important;
-  border: none;
-  box-shadow: none !important;
-}
-
-/* Segments (opcional, para JS) */
-.roulette-segment {
+.spark {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 50%;
-  left: 50%;
-  transform-origin: 0% 0%;
-  background: rgba(255,255,255,0.13);
-  border: 1px solid #fff2;
-  color: #fff;
-  font-size: 13px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 5px;
+  width: 8px;
+  height: 8px;
+  background: #ff4d4d;
+  border-radius: 50%;
+  animation: sparks 0.6s ease-out forwards;
   pointer-events: none;
-  z-index: 2;
-  text-shadow: 0 1px 4px #000a;
+}
+
+/* Responsive para la nueva ruleta */
+@media (max-width: 768px) {
+  .roulette-wheel {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .wheel-center {
+    padding: 20px 30px;
+    font-size: 1.3rem;
+  }
+  
+  .roulette-pointer {
+    top: -35px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid #ff4d4d;
+  }
+  
+  .spin-btn {
+    padding: 12px 30px !important;
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .roulette-wheel {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .wheel-center {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+  }
+  
+  .roulette-pointer {
+    top: -30px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #ff4d4d;
+  }
 }
 
 /* Panel derecho - Pregunta */
@@ -226,16 +410,43 @@ body {
   font-size: 1.2rem;
 }
 
-input#answer-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 12px;
-  border-radius: 8px;
+/* Botones */
+.btn.pause,
+#show-answer,
+#btn-pausa {
+  background: #e53e3e !important;
+  color: #fff !important;
   border: none;
-  outline: none;
-  background: #111a;
-  color: #fff;
-  font-size: 1rem;
+  box-shadow: none !important;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn.pause:active,
+#show-answer:active,
+#btn-pausa:active {
+  background: #c53030 !important;
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  background: #feb2b2 !important;
+  color: #fff5f5 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+.btn.green {
+  background: linear-gradient(90deg, #00d680, #00d680);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
+}
+
+.btn.red {
+  background: linear-gradient(90deg, #ff4d4d, #ff4d4d);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
 }
 
 .btn {
@@ -248,21 +459,6 @@ input#answer-input {
   font-weight: 600;
   box-shadow: 0 2px 8px #0002;
   transition: background 0.2s, transform 0.2s;
-}
-
-.btn.green {
-  background: linear-gradient(90deg, #00ff99, #00c3ff);
-  color: #fff;
-}
-
-.btn.red {
-  background: linear-gradient(90deg, #ff4d4d, #ffb347);
-  color: #fff;
-}
-
-.btn.pause {
-  background: orange;
-  color: #fff;
 }
 
 .btn:active {
@@ -319,15 +515,9 @@ input#answer-input {
   box-shadow: 0 4px 24px #0008;
 }
 
-/* Animación de giro para la ruleta */
-@keyframes spin {
-  from { transform: rotate(0deg);}
-  to { transform: rotate(360deg);}
-}
-
 /* ==========================================================================
-   MODAL DE GANADORES - COMPLETAMENTE CORREGIDO
-   ========================================================================== */
+MODAL DE GANADORES - FUNCIONAL
+========================================================================== */
 
 .winners-modal {
   position: fixed;
@@ -352,21 +542,21 @@ input#answer-input {
 
 .winners-content {
   background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-  border-radius: 20px;
-  padding: 25px;
-  max-width: 500px;
-  width: 95%;
+  border-radius: 25px;
+  padding: 50px 30px;
+  max-width: 650px;
+  width: 100%;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
   transform: scale(0.9);
   transition: transform 0.5s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   position: relative;
   overflow: hidden;
-  max-height: 90vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 }
 
 .winners-modal.active .winners-content {
@@ -379,139 +569,110 @@ input#answer-input {
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 8px;
   background: linear-gradient(90deg, #ff4d4d, #ffb347, #00ff99, #00c3ff);
   z-index: 1;
 }
 
-.trophy-icon {
-  font-size: 5rem;
-  margin-bottom: 5px;
-  display: block;
-  animation: bounce 2s infinite alternate;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
-  100% { transform: translateY(0) scale(1); }
-}
-
-.confetti {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #f00;
-  opacity: 0.8;
-  border-radius: 50%;
-  animation: fall 5s linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
 .winners-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
   background: linear-gradient(90deg, #ff4d4d, #ffb347, #00ff99, #00c3ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  letter-spacing: 1px;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1.5px;
 }
 
-/* PODIO MEJORADO */
+/* PODIO FUNCIONAL */
 .podium {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin: 10px 0;
-  height: 140px;
+  margin: 5px 0;
+  height: 200px;
   flex-shrink: 0;
-  gap: 10px;
+  gap: 20px;
 }
 
 .podium-step {
-  width: 100px;
+  width: 140px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px 12px 0 0;
+  border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
-.podium-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
 .podium-step.first {
-  height: 120px;
-  background: linear-gradient(to top, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0.1));
-  border-color: rgba(255, 215, 0, 0.6);
+  height: 200px;
+  background: linear-gradient(to top, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.15));
+  border-color: rgba(255, 215, 0, 0.7);
   order: 2;
 }
 
 .podium-step.second {
-  height: 100px;
-  background: linear-gradient(to top, rgba(192, 192, 192, 0.4), rgba(192, 192, 192, 0.1));
-  border-color: rgba(192, 192, 192, 0.6);
+  height: 185px;
+  background: linear-gradient(to top, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.15));
+  border-color: rgba(192, 192, 192, 0.7);
   order: 1;
 }
 
 .podium-step.third {
-  height: 80px;
-  background: linear-gradient(to top, rgba(205, 127, 50, 0.4), rgba(205, 127, 50, 0.1));
-  border-color: rgba(205, 127, 50, 0.6);
+  height: 170px;
+  background: linear-gradient(to top, rgba(205, 127, 50, 0.5), rgba(205, 127, 50, 0.15));
+  border-color: rgba(205, 127, 50, 0.7);
   order: 3;
 }
 
 .podium-player {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-weight: bold;
-  font-size: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  padding: 0 5px;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 0 8px;
   text-align: center;
+  min-height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .podium-step.first .podium-player {
   color: #ffd700;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
 }
 
 .podium-step.second .podium-player {
   color: #c0c0c0;
+  font-size: 1.3rem;
 }
 
 .podium-step.third .podium-player {
   color: #cd7f32;
+  font-size: 1.2rem;
 }
 
 .winner-position {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  margin-bottom: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  margin-bottom: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
 }
 
 .first-place .winner-position {
@@ -532,46 +693,179 @@ input#answer-input {
   border-color: #cd7f32;
 }
 
-/* LISTA DE GANADORES CON SCROLL */
+/* LISTA DE CLASIFICACIÓN */
 .winners-list-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  min-height: 250px;
 }
 
 .winners-list-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
   color: #fff;
   text-align: center;
 }
 
 .winners-list {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   margin: 0;
-  padding-right: 8px;
+  padding-right: 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
-/* Personalizar la barra de scroll */
+/* TARJETAS DE JUGADORES */
+.winner-card {
+    margin-top: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.winner-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.winner-card.first-place {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.08));
+  border: 3px solid rgba(255, 215, 0, 0.5);
+  order: -1;
+}
+
+.winner-card.second-place {
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.3), rgba(192, 192, 192, 0.08));
+  border: 3px solid rgba(192, 192, 192, 0.5);
+}
+
+.winner-card.third-place {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.08));
+  border: 3px solid rgba(205, 127, 50, 0.5);
+}
+
+.winner-name {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.winner-score {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #00ff99;
+  flex-shrink: 0;
+  text-shadow: 0 0 12px rgba(0, 255, 153, 0.4);
+}
+
+/* EMPATES */
+.tie-indicator {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-top: 10px;
+  background: rgba(255, 215, 0, 0.25);
+  padding: 5px 5px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  text-align: center;
+  margin-left: 40px;
+  width: 30%;
+  height: 30px;
+  
+}
+
+.winner-card.tied {
+  border: 3px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.08));
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+  position: relative;
+}
+
+.podium-step.tied-position {
+  animation: pulse-tie 2s infinite;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes pulse-tie {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px rgba(255, 215, 0, 0.7);
+  }
+}
+
+/* BOTÓN CONTINUAR */
+.winners-button-container {
+  margin-top: 15px;
+  padding-top: 20px;
+  flex-shrink: 0;
+  position: relative;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.continue-btn {
+  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+  color: white;
+  border: 3px solid #ff4d4d;
+  padding: 5px 12px;
+  border-radius: 60px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 280px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 30px rgba(255, 77, 77, 0.4);
+}
+
+.continue-btn:hover {
+  background: transparent;
+  color: #ff4d4d;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(255, 77, 77, 0.5);
+  border-color: #ff4d4d;
+}
+
+.continue-btn:active {
+  transform: translateY(-2px);
+}
+
+/* Scrollbar */
 .winners-list::-webkit-scrollbar {
-  width: 8px;
+  width: 20px;
+  height: 25px;
 }
 
 .winners-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
 }
 
 .winners-list::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #ff4d4d, #00ff99);
-  border-radius: 10px;
+  border-radius: 12px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
@@ -580,357 +874,130 @@ input#answer-input {
   background: linear-gradient(180deg, #ff6b6b, #00e676);
 }
 
-/* TARJETAS DE JUGADORES */
-.winner-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.winner-card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.winner-card.first-place {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.05));
-  border: 2px solid rgba(255, 215, 0, 0.4);
-  order: -1;
-}
-
-.winner-card.second-place {
-  background: linear-gradient(135deg, rgba(192, 192, 192, 0.25), rgba(192, 192, 192, 0.05));
-  border: 2px solid rgba(192, 192, 192, 0.4);
-}
-
-.winner-card.third-place {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.25), rgba(205, 127, 50, 0.05));
-  border: 2px solid rgba(205, 127, 50, 0.4);
-}
-
-.winner-position-small {
-  font-size: 1.1rem;
-  font-weight: bold;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #f00;
+  opacity: 0.8;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fall 5s linear forwards;
 }
 
-.winner-name {
-  flex-grow: 1;
-  text-align: left;
-  margin-left: 15px;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.winner-score {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #00ff99;
-  flex-shrink: 0;
-  text-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
-}
-
-/* BOTÓN CONTINUAR */
-.winners-button-container {
-  margin-top: 10px;
-  padding-top: 15px;
-  flex-shrink: 0;
-  position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.continue-btn {
-  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
-  color: white;
-  border: 2px solid #ff4d4d;
-  padding: 14px 35px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 250px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  box-shadow: 0 5px 20px rgba(255, 77, 77, 0.3);
-}
-
-.continue-btn:hover {
-  background: transparent;
-  color: #ff4d4d;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
-  border-color: #ff4d4d;
-}
-
-.continue-btn:active {
-  transform: translateY(-1px);
-}
-
-/* ==========================================================================
-   ESTILOS PARA EMPATES
-   ========================================================================== */
-
-/* Indicador de empate en tarjetas */
-.tie-indicator {
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: #ffd700;
-  margin-top: 5px;
-  background: rgba(255, 215, 0, 0.2);
-  padding: 2px 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  text-align: center;
-  width: 100%;
-}
-
-/* Tarjetas con empate */
-.winner-card.tied {
-  border: 2px solid #ffd700;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-  position: relative;
-}
-
-/* Posiciones empatadas en el podio */
-.podium-step.tied-position {
-  animation: pulse-tie 2s infinite;
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-}
-
-.podium-step.tied-position.first {
-  background: linear-gradient(to top, rgba(255, 215, 0, 0.6), rgba(255, 215, 0, 0.2));
-}
-
-.podium-step.tied-position.second {
-  background: linear-gradient(to top, rgba(192, 192, 192, 0.6), rgba(192, 192, 192, 0.2));
-}
-
-.podium-step.tied-position.third {
-  background: linear-gradient(to top, rgba(205, 127, 50, 0.6), rgba(205, 127, 50, 0.2));
-}
-
-@keyframes pulse-tie {
-  0%, 100% { 
-    transform: scale(1); 
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-  }
-  50% { 
-    transform: scale(1.05); 
-    box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
   }
 }
 
-/* Para mostrar múltiples nombres en el podio */
-.podium-player {
-  font-size: 0.9em;
-  line-height: 1.2;
-  min-height: 2.4em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-wrap: wrap;
-}
-
-/* Mejora para tarjetas de jugadores empatados */
-.winner-card.tied .winner-position {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #000;
-  border-color: #ffd700;
-  animation: glow-tie 1.5s infinite alternate;
-}
-
-@keyframes glow-tie {
-  from { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
-  to { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
-}
-
-/* Estilos específicos para empates en el podio */
-.podium-step .podium-player.tied {
-  font-size: 0.8em;
-  line-height: 1.1;
-}
-
-/* Ajustes para mostrar múltiples nombres en el podio */
-.podium-step .podium-player span.multiple-names {
-  display: block;
-  font-size: 0.8em;
-  line-height: 1.2;
-}
-
-/* Ajustes responsivos para empates */
+/* Responsive */
 @media (max-width: 768px) {
-  .podium-player {
-    font-size: 0.8em;
-  }
-  
-  .tie-indicator {
-    font-size: 0.7rem;
-    padding: 1px 6px;
-  }
-  
   .game-container {
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 15px;
   }
-  
+
   .winners-content {
     max-width: 95%;
-    padding: 25px 20px;
+    padding: 30px 25px;
     max-height: 85vh;
   }
-  
+
   .winners-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
-  
+
   .podium {
-    height: 120px;
-    gap: 8px;
+    height: 160px;
+    gap: 15px;
   }
-  
+
   .podium-step {
-    width: 85px;
+    width: 110px;
   }
-  
+
   .podium-step.first {
+    height: 140px;
+  }
+
+  .podium-step.second {
+    height: 120px;
+  }
+
+  .podium-step.third {
     height: 100px;
   }
-  
-  .podium-step.second {
-    height: 85px;
-  }
-  
-  .podium-step.third {
-    height: 70px;
-  }
-  
+
   .podium-player {
-    font-size: 0.9rem;
-  }
-  
-  .winner-card {
-    padding: 12px 15px;
-  }
-  
-  .winner-name {
-    font-size: 1rem;
-    margin-left: 12px;
-  }
-  
-  .winner-score {
     font-size: 1.1rem;
   }
-  
-  .winners-list {
-    max-height: 200px;
+
+  .winner-card {
+    padding: 18px 20px;
   }
-  
+
+  .winner-name {
+    font-size: 1.2rem;
+    margin-left: 18px;
+  }
+
+  .winner-score {
+    font-size: 1.3rem;
+  }
+
+  .winners-list {
+    max-height: 250px;
+  }
+
   .continue-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
+    padding: 14px 30px;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .winners-content {
-    padding: 20px 15px;
+    padding: 25px 20px;
   }
-  
+
   .winners-title {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
-  
-  .trophy-icon {
-    font-size: 4rem;
-  }
-  
+
   .podium {
+    height: 140px;
+  }
+
+  .podium-step {
+    width: 90px;
+  }
+
+  .podium-step.first {
+    height: 120px;
+  }
+
+  .podium-step.second {
     height: 100px;
   }
-  
-  .podium-step {
-    width: 70px;
-  }
-  
-  .podium-step.first {
+
+  .podium-step.third {
     height: 85px;
   }
-  
-  .podium-step.second {
-    height: 70px;
-  }
-  
-  .podium-step.third {
-    height: 60px;
-  }
-  
+
   .podium-player {
-    font-size: 0.75em;
-    min-height: 2.2em;
+    font-size: 0.9em;
+    min-height: 2.5em;
   }
-  
+
   .winner-card.tied {
-    padding: 10px 12px;
+    padding: 15px 18px;
   }
-  
+
   .tie-indicator {
-    font-size: 0.65rem;
-    padding: 1px 4px;
-  }
-}
-
-/* Ajustes adicionales para mejor visualización de empates */
-.winner-card .winner-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.winner-card.tied .winner-info {
-  align-items: flex-start;
-}
-
-.winner-card.tied .winner-name {
-  margin-left: 0;
-  margin-bottom: 5px;
-}
-
-/* Efecto especial para empates en primer lugar */
-.winner-card.first-place.tied {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-  animation: golden-glow 2s infinite alternate;
-}
-
-@keyframes golden-glow {
-  from {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-  }
-  to {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    font-size: 0.75rem;
+    padding: 3px 8px;
   }
 }
