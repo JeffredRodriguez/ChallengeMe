@@ -35,6 +35,7 @@ body {
 .sidebar {
   padding: 25px 18px;
   min-width: 180px;
+  order: 1; /* Izquierda en escritorio */
 }
 
 .sidebar-title {
@@ -85,6 +86,7 @@ NUEVO DISEÑO ESPECTACULAR DE RULETA
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  order: 2; /* Centro en escritorio */
 }
 
 .roulette-container {
@@ -396,6 +398,7 @@ NUEVO DISEÑO ESPECTACULAR DE RULETA
 .question-panel {
   padding: 25px 18px;
   min-width: 220px;
+  order: 3; /* Derecha en escritorio */
 }
 
 .question-area {
@@ -892,19 +895,38 @@ MODAL DE GANADORES - FUNCIONAL
   }
 }
 
-
-
-
-
-
-
-
-
-
 /* ==========================================================================
-CORRECCIÓN ESPECÍFICA PARA CENTRADO EN MÓVIL
+CORRECCIÓN ESPECÍFICA PARA ORDEN RESPONSIVO
 ========================================================================== */
 
+/* Escritorio - Layout original */
+@media (min-width: 769px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: 22% 1fr 28%;
+    width: 100vw;
+    height: 100vh;
+    gap: 20px;
+    padding: 30px 0;
+  }
+  
+  /* Podio a la izquierda */
+  .sidebar {
+    order: 1;
+  }
+  
+  /* Ruleta en el centro */
+  .main-game {
+    order: 2;
+  }
+  
+  /* Preguntas a la derecha */
+  .question-panel {
+    order: 3;
+  }
+}
+
+/* Móvil - Nuevo orden */
 @media (max-width: 768px) {
   .game-container {
     display: flex !important;
@@ -917,8 +939,9 @@ CORRECCIÓN ESPECÍFICA PARA CENTRADO EN MÓVIL
     min-height: 100vh;
   }
 
-  /* Panel de preguntas - completamente centrado */
+  /* Preguntas arriba */
   .question-panel {
+    order: 1;
     width: 100% !important;
     max-width: 400px !important;
     margin: 0 auto !important;
@@ -928,8 +951,9 @@ CORRECCIÓN ESPECÍFICA PARA CENTRADO EN MÓVIL
     align-items: center;
   }
 
-  /* Ruleta - completamente centrada */
+  /* Ruleta en medio */
   .main-game {
+    order: 2;
     width: 100% !important;
     display: flex !important;
     flex-direction: column;
@@ -947,8 +971,9 @@ CORRECCIÓN ESPECÍFICA PARA CENTRADO EN MÓVIL
     width: 100%;
   }
 
-  /* Podio - completamente centrado */
+  /* Podio abajo */
   .sidebar {
+    order: 3;
     width: 100% !important;
     max-width: 400px !important;
     margin: 0 auto !important;
