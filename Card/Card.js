@@ -196,26 +196,28 @@ class CardGame {
         this.updateUI();
     }
 
-    drawCard() {
-        if (this.isDrawing || !this.gameActive) return;
+ drawCard() {
+    if (this.isDrawing || !this.gameActive) return;
 
-        this.isDrawing = true;
-        const cardInner = document.getElementById('card-inner');
+    this.isDrawing = true;
+    const cardInner = document.getElementById('card-inner');
 
-        // Voltear la carta
-        cardInner.classList.toggle('flipped');
+    // Voltear la carta
+    cardInner.classList.toggle('flipped');
 
-        // Si la carta está volteada (mostrando el reverso), mostrar nuevo reto
-        if (cardInner.classList.contains('flipped')) {
-            this.showRandomChallenge();
-        } else {
-            // Si está mostrando el frente, resetear texto y ocultar botones
-            document.getElementById('card-text').textContent = "Haz clic para siguiente reto";
-            document.getElementById('result-buttons-container').classList.add('hidden');
-        }
-
-        this.isDrawing = false;
+    // Si la carta está volteada (mostrando el reverso), mostrar nuevo reto
+    if (cardInner.classList.contains('flipped')) {
+        this.showRandomChallenge();
+        // MOSTRAR CARAS DE SORPRESA EN EL LADO DERECHO
+        this.showSurpriseFaces();
+    } else {
+        // Si está mostrando el frente, resetear texto y ocultar botones
+        document.getElementById('card-text').textContent = "Haz clic para siguiente reto";
+        document.getElementById('result-buttons-container').classList.add('hidden');
     }
+
+    this.isDrawing = false;
+}
 
     showRandomChallenge() {
         if (this.challenges.length === 0) {
@@ -563,7 +565,12 @@ class CardGame {
             }, 5000);
         }
     }
+    
 }
+
+
+
+
 
 // Inicializar juego cuando se cargue la página
 document.addEventListener('DOMContentLoaded', () => {
@@ -577,3 +584,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Iniciar juego
     new CardGame();
 });
+
