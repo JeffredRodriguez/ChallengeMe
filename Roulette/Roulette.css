@@ -892,112 +892,165 @@ MODAL DE GANADORES - FUNCIONAL
   }
 }
 
-/* Responsive */
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+CORRECCIÓN ESPECÍFICA PARA CENTRADO EN MÓVIL
+========================================================================== */
+
 @media (max-width: 768px) {
   .game-container {
-    grid-template-columns: 1fr;
-    gap: 15px;
-    padding: 15px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh;
   }
 
-  .winners-content {
-    max-width: 95%;
-    padding: 30px 25px;
-    max-height: 85vh;
+  /* Panel de preguntas - completamente centrado */
+  .question-panel {
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .winners-title {
-    font-size: 2.5rem;
+  /* Ruleta - completamente centrada */
+  .main-game {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    padding: 10px 0;
   }
 
-  .podium {
-    height: 160px;
-    gap: 15px;
+  .roulette-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 
-  .podium-step {
-    width: 110px;
+  /* Podio - completamente centrado */
+  .sidebar {
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .podium-step.first {
-    height: 140px;
+  .sidebar-title {
+    text-align: center;
+    width: 100%;
   }
 
-  .podium-step.second {
-    height: 120px;
+  /* Asegurar que la lista de jugadores ocupe todo el ancho disponible */
+  .players-list {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .podium-step.third {
-    height: 100px;
+  .player-card {
+    width: 100% !important;
+    margin: 0 auto;
   }
 
-  .podium-player {
-    font-size: 1.1rem;
+  /* Centrar el área de pregunta */
+  .question-area {
+    width: 100% !important;
+    text-align: center;
   }
 
-  .winner-card {
-    padding: 18px 20px;
+  /* Centrar botones de resultado */
+  .result-buttons {
+    justify-content: center;
   }
 
-  .winner-name {
-    font-size: 1.2rem;
-    margin-left: 18px;
+  /* Ajustar ruleta para móvil manteniendo centrado */
+  .roulette-wheel {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
   }
 
-  .winner-score {
-    font-size: 1.3rem;
-  }
-
-  .winners-list {
-    max-height: 250px;
-  }
-
-  .continue-btn {
-    padding: 14px 30px;
-    font-size: 1.2rem;
+  /* Footer en móvil */
+  .footer {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (max-width: 480px) {
-  .winners-content {
-    padding: 25px 20px;
+  .game-container {
+    padding: 15px;
+    gap: 15px;
   }
 
-  .winners-title {
-    font-size: 2.2rem;
+  .question-panel,
+  .sidebar {
+    max-width: 350px !important;
+    padding: 15px;
   }
 
-  .podium {
-    height: 140px;
+  .roulette-wheel {
+    width: 250px;
+    height: 250px;
   }
 
-  .podium-step {
-    width: 90px;
+  .wheel-center {
+    padding: 12px 20px;
+    font-size: 1rem;
   }
 
-  .podium-step.first {
-    height: 120px;
+  .footer {
+    max-width: 350px;
+  }
+}
+
+/* Forzar el centrado en elementos específicos */
+@media (max-width: 768px) {
+  .category-info {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
-  .podium-step.second {
-    height: 100px;
+  .spin-btn {
+    margin: 0 auto;
+    display: block;
   }
 
-  .podium-step.third {
-    height: 85px;
-  }
-
-  .podium-player {
-    font-size: 0.9em;
-    min-height: 2.5em;
-  }
-
-  .winner-card.tied {
-    padding: 15px 18px;
-  }
-
-  .tie-indicator {
-    font-size: 0.75rem;
-    padding: 3px 8px;
+  /* Asegurar que todos los textos estén centrados */
+  .question-area h3,
+  .category-info h2,
+  .sidebar-title {
+    text-align: center;
+    width: 100%;
   }
 }

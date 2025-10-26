@@ -7,18 +7,16 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Roulette.css" />
-   <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+  <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen p-0 m-0 relative">
-  <!-- Fondo - Asegurar que cubra toda la pantalla -->
+  <!-- Fondo -->
   <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
   
-  <!-- Modal de Ganadores CORREGIDO -->
+  <!-- Modal de Ganadores -->
   <div id="winners-modal" class="winners-modal">
     <div class="winners-content glass">
-      
-      
-      
       <div class="podium">
         <div class="podium-step first">
           <div class="podium-player" id="first-place-name">-</div>
@@ -37,7 +35,7 @@
       <div class="winners-list-container">
         <h2 class="winners-list-title">Clasificación Completa</h2>
         <div id="winners-list" class="winners-list">
-          <!-- Los ganadores se insertarán aquí dinámicamente -->
+          <!-- Ganadores dinámicos -->
         </div>
       </div>
       
@@ -47,32 +45,10 @@
     </div>
   </div>
 
+  <!-- Contenedor principal del juego -->
   <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
-    <!-- Panel Izquierdo - Podio -->
-    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
-      <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
-      <div id="players-container" class="players-list w-full"></div>
-    </aside>
-
-    <!-- Centro - Ruleta -->
-    <main class="main-game col-span-3 flex flex-col items-center justify-center">
-      <div class="roulette-container flex flex-col items-center">
-        <div class="relative flex items-center justify-center">
-          <div class="roulette-wheel" id="roulette-wheel">
-            <!-- Los segmentos se renderizan dinámicamente -->
-            <div class="wheel-center neon-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold px-8 py-4 shadow-lg">ChallengeMe</div>
-            <div class="roulette-pointer"></div>
-          </div>
-        </div>
-        <button id="spin-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Girar la Ruleta</button>
-      </div>
-      <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
-        <h2 id="category-name" class="text-xl font-semibold mb-1">Categoría</h2>
-        <p id="category-description" class="text-sm text-gray-200">Preguntas de la categoría seleccionada.</p>
-      </div>
-    </main>
-
-    <!-- Derecha - Pregunta -->
+    
+    <!-- Derecha (ahora arriba en mobile) - Panel de Preguntas -->
     <aside class="question-panel glass col-span-1 flex flex-col items-center py-6 px-2">
       <div id="question-area" class="question-area hidden w-full max-w-xs mx-auto bg-[#222c] p-6 rounded-lg shadow-lg">
         <h3 id="question-text" class="text-lg font-bold mb-2">¿Pregunta?</h3>
@@ -88,9 +64,36 @@
         </div>
       </div>
     </aside>
+
+    <!-- Centro - Ruleta -->
+    <main class="main-game col-span-3 flex flex-col items-center justify-center">
+      <div class="roulette-container flex flex-col items-center">
+        <div class="relative flex items-center justify-center">
+          <div class="roulette-wheel" id="roulette-wheel">
+            <!-- Los segmentos se renderizan dinámicamente -->
+            <div class="wheel-center neon-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold px-8 py-4 shadow-lg">ChallengeMe</div>
+            <div class="roulette-pointer"></div>
+          </div>
+        </div>
+        <button id="spin-btn" class="spin-btn neon-btn mt-8 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">
+          Girar la Ruleta
+        </button>
+      </div>
+
+      <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
+        <h2 id="category-name" class="text-xl font-semibold mb-1">Categoría</h2>
+        <p id="category-description" class="text-sm text-gray-200">Preguntas de la categoría seleccionada.</p>
+      </div>
+    </main>
+
+    <!-- Izquierda (ahora abajo en mobile) - Podio -->
+    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
+      <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
+      <div id="players-container" class="players-list w-full"></div>
+    </aside>
   </div>
 
-  <!-- Barra inferior - Jugador actual -->
+  <!-- Barra inferior -->
   <footer class="footer glass fixed bottom-0 left-0 right-0 mx-auto w-full max-w-4xl flex justify-between items-center px-6 py-3 rounded-t-lg shadow-lg">
     <span>Turno de: <strong id="current-player"></strong></span>
     <button id="btn-pausa" class="btn pause">⏸ Pausa</button>
