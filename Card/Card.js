@@ -570,8 +570,6 @@ class CardGame {
 
 
 
-
-
 // Inicializar juego cuando se cargue la página
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🃏 Inicializando juego de cartas...');

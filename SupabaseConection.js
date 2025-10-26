@@ -1,6 +1,3 @@
-// ------------------------
-// CLIENTE SUPABASE 
-// ------------------------
 
 class SupabaseClient {
     constructor() {
