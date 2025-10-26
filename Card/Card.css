@@ -243,13 +243,17 @@ body {
 }
 
 .btn.green {
-  background: linear-gradient(90deg, #00ff99, #00c3ff);
-  color: #fff;
+  background: linear-gradient(90deg, #00d680, #00d680);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
 }
 
 .btn.red {
-  background: linear-gradient(90deg, #d52f01, #ffb347);
-  color: #fff;
+  background: linear-gradient(90deg, #ff4d4d, #ff4d4d);
+  color: #fff !important;
+  border: none;
+  box-shadow: none !important;
 }
 
 .btn.pause {
