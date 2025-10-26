@@ -19,7 +19,7 @@ body {
   width: 100vw;
   height: 100vh;
   gap: 20px;
-  padding: 30px;
+  
 }
 
 /* Glassmorphism */
@@ -87,7 +87,6 @@ body {
 
 .card-container {
   text-align: center;
-  margin-bottom: 30px;
   position: relative;
 }
 
