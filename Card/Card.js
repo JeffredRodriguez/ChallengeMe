@@ -1,4 +1,6 @@
-// ------------------------
+
+
+       // ------------------------
 // JUEGO DE CARTAS
 // ------------------------
 
@@ -208,8 +210,8 @@ class CardGame {
     // Si la carta está volteada (mostrando el reverso), mostrar nuevo reto
     if (cardInner.classList.contains('flipped')) {
         this.showRandomChallenge();
-        // MOSTRAR CARAS DE SORPRESA EN EL LADO DERECHO
-        this.showSurpriseFaces();
+        // MOSTRAR ANIMACIÓN DE SORPRESA
+        this.showSurpriseAnimation();
     } else {
         // Si está mostrando el frente, resetear texto y ocultar botones
         document.getElementById('card-text').textContent = "Haz clic para siguiente reto";
@@ -370,8 +372,9 @@ class CardGame {
         if (cardInner.classList.contains('flipped')) {
             cardInner.classList.remove('flipped');
         }
-        document.getElementById('card-text').textContent = "Haz clic para comenzar";
+              document.getElementById('card-text').textContent = "Haz clic para siguiente reto";
         document.getElementById('result-buttons-container').classList.add('hidden');
+        this.isDrawing = false;
     }
 
     updateUI() {
@@ -582,4 +585,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Iniciar juego
     new CardGame();
 });
-
