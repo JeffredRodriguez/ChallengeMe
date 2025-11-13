@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Personalización del select */
+#categoria-select {
+  background-position: calc(100% - 20px) center, calc(100% - 15px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease;
+}
+
+#categoria-select:hover {
+  border-color: #e53e3e;
+}
+
+.input-jugador {
+  background-color: #4a5568;
+  border: 2px solid #4a5568;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1rem;
+  color: white;
+}
+
+.input-jugador:focus {
+  outline: none;
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+}
+
+.input-jugador::placeholder {
+  color: #a0aec0;
+}
+
+/* Efecto de elevación en hover para las tarjetas de jugador */
+#jugadores-container > div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#jugadores-container > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Botones de incremento/decremento */
+#decrease-players, #increase-players {
+  transition: all 0.2s ease;
+}
+
+#decrease-players:active, #increase-players:active {
+  transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  #jugadores-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #player-count {
+    min-width: 1.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+}

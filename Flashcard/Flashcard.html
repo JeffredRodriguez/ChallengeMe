@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flashcards - ChallengeMe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Flashcard.css" />
+  <link rel="icon" href="/img/IconPage.png" type="image/x-icon">
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen p-0 m-0 relative">
+  <img src="/img/Background.png" alt="Fondo" class="fixed inset-0 w-full h-full object-cover opacity-20 -z-10">
+
+  <div class="absolute top-4 md:top-0 left-1/2 transform -translate-x-1/2 z-20">
+    <img src="/img/Mainlogo.png" alt="ChallengeMe Logo" class="h-40 w-40 md:h-44 md:w-44 object-contain mx-auto">
+  </div>
+
+  <div id="winners-modal" class="winners-modal">
+    <div class="winners-content glass">
+      <div class="podium">
+        <div class="podium-step first">
+          <div class="podium-player" id="first-place-name">-</div>
+          <div class="winner-position">1°</div>
+        </div>
+        <div class="podium-step second">
+          <div class="podium-player" id="second-place-name">-</div>
+          <div class="winner-position">2°</div>
+        </div>
+        <div class="podium-step third">
+          <div class="podium-player" id="third-place-name">-</div>
+          <div class="winner-position">3°</div>
+        </div>
+      </div>
+
+      <div class="winners-list-container">
+        <h2 class="winners-list-title">Clasificación Completa</h2>
+        <div id="winners-list" class="winners-list"></div>
+      </div>
+
+      <div class="winners-button-container">
+        <button id="continue-btn" class="continue-btn">Volver al Lobby</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-container grid grid-cols-1 md:grid-cols-5 gap-4 p-4 md:p-8 h-full min-h-screen">
+
+    <aside class="sidebar glass col-span-1 flex flex-col items-center py-6 px-2 mb-4 md:mb-0">
+      <h2 class="sidebar-title text-2xl mb-4">🏆 Podio</h2>
+      <div id="players-container" class="players-list w-full"></div>
+    </aside>
+
+    <main class="main-game md:col-span-3 col-span-1 flex flex-col items-center justify-center">
+      <div class="flashcard-container flex flex-col items-center w-full">
+        <div id="timer-wrapper" class="timer-display glass">
+          <span class="timer-label">Tiempo restante</span>
+          <span id="timer-display" class="timer-value">01:00</span>
+        </div>
+
+        <div class="turn-summary glass mt-6">
+          <div class="turn-label">Turno de</div>
+          <h2 id="current-player-name" class="turn-player">Selecciona iniciar</h2>
+          <div class="turn-stats">
+            <div>
+              <span class="stat-label">Correctas</span>
+              <span id="current-player-score" class="stat-value">0</span>
+            </div>
+            <div>
+              <span class="stat-label">Respondidas</span>
+              <span id="current-player-answered" class="stat-value">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flashcard glass mt-6">
+          <div class="flashcard-header">
+            <span class="badge">Flashcard</span>
+            <span id="question-counter" class="question-counter">00</span>
+          </div>
+          <h3 id="category-name" class="category-name">-</h3>
+          <p id="question-text" class="flashcard-text">Presiona "Comenzar turno" para revelar la primera tarjeta.</p>
+          <p id="question-hint" class="flashcard-hint hidden"></p>
+        </div>
+
+        <p id="turn-message" class="turn-message mt-6 text-center">Cada jugador dispone de 60 segundos. Usa los botones para llevar la cuenta de sus aciertos.</p>
+
+        <div class="control-group mt-6">
+          <button id="start-turn" class="spin-btn neon-btn px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition hover:scale-105">Comenzar turno</button>
+          <div class="answer-buttons">
+            <button id="btn-correct" class="btn green" disabled>✔ Correcto</button>
+            <button id="btn-incorrect" class="btn red" disabled>✘ Incorrecto</button>
+            <button id="btn-skip" class="btn neutral" disabled>⏭ Pasar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-info glass mt-8 p-4 rounded-lg w-full max-w-md text-center">
+        <h2 class="text-xl font-semibold mb-1">Instrucciones</h2>
+        <p class="text-sm text-gray-200">Marca las respuestas correctas, incorrectas o pasa las tarjetas. Cuando el tiempo termine, el turno avanza automáticamente al siguiente jugador.</p>
+      </div>
+    </main>
+
+    <aside class="info-panel glass col-span-1 flex flex-col py-6 px-4">
+      <h3 class="info-title text-xl mb-4 flex items-center gap-2"><i class="fas fa-lightbulb"></i> Tips rápidos</h3>
+      <ul class="info-list flex-1">
+        <li><i class="fas fa-random"></i> Las tarjetas se mezclan de forma automática para cada turno.</li>
+        <li><i class="fas fa-stopwatch"></i> Puedes pausar el juego si alguien necesita un respiro.</li>
+        <li><i class="fas fa-medal"></i> El podio se actualiza en tiempo real según los aciertos.</li>
+        <li><i class="fas fa-undo"></i> Al reiniciar se conserva la misma configuración de jugadores y categoría.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="footer glass fixed bottom-0 left-0 right-0 mx-auto w-full max-w-4xl flex justify-between items-center px-6 py-3 rounded-t-lg shadow-lg">
+    <span>Turno de: <strong id="current-player"></strong></span>
+    <button id="btn-pausa" class="btn pause">⏸ Pausa</button>
+  </footer>
+
+  <div id="pause-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>Juego en Pausa</h2>
+      <button id="resume-game" class="btn green">Reanudar</button>
+      <button id="exit-game" class="btn red">Salir</button>
+    </div>
+  </div>
+
+  <div id="exit-confirm-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>¿Estás seguro de que quieres salir?</h2>
+      <p class="my-4">Se perderá el progreso actual del juego.</p>
+      <div class="flex gap-4 justify-center">
+        <button id="confirm-exit" class="btn red">Sí, salir</button>
+        <button id="cancel-exit" class="btn green">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="backgroundMusic1">
+    <source src="/aud/Bass Electronic Music] Helkimer 🇦🇴 - Flow.mp3" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic2">
+    <source src="/aud/'Dystopia' by Neutrin05 🇺🇸 _ 👹 Calm Dark Electronic Music.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="backgroundMusic3">
+    <source src="/aud/dyalla - Wonderful [Chill Electronic].mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="../SupabaseConection.js"></script>
+  <script type="module" src="../Audio-manager.js"></script>
+  <script type="module" src="Flashcard.js"></script>
+</body>
+</html>
